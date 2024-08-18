@@ -14,15 +14,32 @@ h1{
 }
 
 .mainContent{
+    margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
 .bloc{
-    margin-top: 25px;
+    margin-bottom: 25px;
     background-color: #e8ae6d;
     height: 350px;
+    width: 800px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.competitionContent{
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.blocCompetition{
+    margin-bottom: 25px;
+    background-color: #e8ae6d;
+    height: 150px;
     width: 800px;
     border-radius: 5px;
     padding: 10px;
