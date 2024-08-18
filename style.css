@@ -23,7 +23,6 @@ h1{
 .bloc{
     margin-bottom: 25px;
     background-color: #e8ae6d;
-    height: 350px;
     width: 800px;
     border-radius: 5px;
     padding: 10px;
@@ -39,7 +38,6 @@ h1{
 .blocCompetition{
     margin-bottom: 25px;
     background-color: #e8ae6d;
-    height: 150px;
     width: 800px;
     border-radius: 5px;
     padding: 10px;
