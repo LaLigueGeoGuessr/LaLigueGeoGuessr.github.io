@@ -1,0 +1,28 @@
+body{
+    background-color: #f6e5d1;
+    color: #272035;
+}
+
+h1{
+    text-align: center;
+}
+
+#logo{
+    display: block;
+    margin: auto;
+}
+
+.mainContent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.bloc{
+    margin-top: 25px;
+    background-color: #e8ae6d;
+    height: 350px;
+    width: 800px;
+    border-radius: 5px;
+    padding: 10px;
+}
