@@ -1,6 +1,11 @@
+html {
+	scroll-behavior: smooth;
+}
+
 body{
     background-color: #f6e5d1;
     color: #272035;
+    margin: 0px;
 }
 
 #language {
@@ -11,22 +16,32 @@ body{
     right: 0;
 }
 
+.mainTitles {
+    background-color: #ffd29b;
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.mainTitles a {
+    font-size: 30px;
+    color: #272035;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.mainTitles a:hover {
+    background: red;
+}
+
 h1{
     text-align: center;
     font-size: 35px;
-}
-
-ul.no-bullets {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
-}
-
-ul.no-bullets li {
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }
 
 #geoguessr{
@@ -42,7 +57,22 @@ ul.no-bullets li {
 }
 
 .mainContent{
-    margin-top: 25px;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.competitionContent{
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.prestationContent{
+    margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -56,23 +86,30 @@ ul.no-bullets li {
     padding: 10px;
 }
 
-.competitionContent{
-    margin-top: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.blocCompetition{
-    margin-bottom: 25px;
-    background-color: #e8ae6d;
-    width: 700px;
-    border-radius: 5px;
-    padding: 10px;
-}
-
 .contentBlocCompetition{
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+footer{
+    text-align: center;
+    padding: 5px;
+    background-color: #ffce97;
+    color: #272035;
+}
+
+.networks{
+    display: flex; 
+    justify-content: center;
+    gap: 20px;
+}
+
+.networks p{
+    display: flex;
+    align-items:center;
+}
+
+.networks img{
+    padding-right: 10px;
 }
