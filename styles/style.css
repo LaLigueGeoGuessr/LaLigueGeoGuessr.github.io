@@ -3,10 +3,13 @@ html {
 }
 
 body{
+    font-family: "Lexend Deca";
     background-color: #f6e5d1;
     color: #272035;
     margin: 0px;
 }
+
+@font-face { font-family: "Lexend Deca"; src: url("../resources/LexendDeca-VariableFont_wght.ttf"); }
 
 #language {
     position: absolute;
