@@ -1,0 +1,133 @@
+html {
+	scroll-behavior: smooth;
+}
+
+
+body{
+    font-family: "Lexend Deca";
+    background-color: #f6e5d1;
+    color: #272035;
+    margin: 0px;
+}
+
+@font-face { font-family: "Lexend Deca"; src: url("../resources/LexendDeca-VariableFont_wght.ttf"); }
+
+h1{
+    text-align: center;
+    font-size: 35px;
+}
+
+.top{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+h2{
+    text-align: center;
+    font-size: 28px;
+}
+
+h3{
+    text-align: center;
+    font-size: 24px;
+}
+
+.mainTitles {
+    background-color: #ffd29b;
+    position: sticky;
+    top: 0px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.mainTitles a {
+    font-size: 30px;
+    color: #272035;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.mainTitles a:hover {
+    background: red;
+}
+
+.div{
+    margin-top: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.blocTeam{
+    margin-bottom: 25px;
+    background-color: #e8ae6d;
+    width: 400px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.teamName{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.teamName img{
+    width: 50px;
+    height: 50px;
+}
+
+.blocTeam ul{
+    list-style-type: none;
+}
+
+.blocTeam ul li{
+    padding-bottom: 5px;
+}
+
+.gameModes{
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.blocMode img{
+    /* 1.929824561 ratio */
+    height: 400px;
+    width: 771px;
+}
+
+footer{
+    text-align: center;
+    padding: 5px;
+    background-color: #ffce97;
+    color: #272035;
+}
+
+.networks{
+    display: flex; 
+    justify-content: center;
+    gap: 20px;
+}
+
+.networks p{
+    display: flex;
+    align-items:center;
+}
+
+.networks img{
+    padding-right: 10px;
+}
