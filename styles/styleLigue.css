@@ -110,11 +110,43 @@ h3{
     width: 771px;
 }
 
-footer{
-    text-align: center;
-    padding: 5px;
+footer {
+    padding: 20px 0 5px;
     background-color: #ffce97;
     color: #272035;
+    font-size: 16px;
+}
+
+footer nav {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer h4 {
+    margin: 0 0 8px;
+}
+
+footer a img {
+    margin-right: 5px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #272035;
+}
+
+footer a:hover {
+    color: #524c5d;
+}
+
+footer p {
+    text-align: center;
 }
 
 .networks{
