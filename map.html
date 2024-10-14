@@ -42,8 +42,11 @@
                     }
                     return res.json();
                 })
-                .then((data) =>
-                    L.marker([data.lat, data.lng]).addTo(map).bindPopup(data.name))
+                .then((data) => {
+                    for(let i = 0; i < data.length; i++){
+                        L.marker([data[i].lat, data[i].lng]).addTo(map).bindPopup(data[i].name)
+                    }
+                })   
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
         }
@@ -58,8 +61,11 @@
                     }
                     return res.json();
                 })
-                .then((data) =>
-                    L.marker([data.lat, data.lng], {icon: redIcon}).addTo(map).bindPopup(data.name))
+                .then((data) => {
+                    for(let i = 0; i < data.length; i++){
+                        L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
+                    }
+                })    
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
         }
