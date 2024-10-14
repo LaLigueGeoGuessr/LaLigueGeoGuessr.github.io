@@ -38,12 +38,21 @@
             L.marker([coords[i]["lat"], coords[i]["lng"]]).addTo(map).bindPopup(coords[i]["name"]);
         }
 
-        fetch("coordinatesD3.json")
-        .then(r=>r.text())
-        .then(text => {
-            lines = text.split("\n");
-            console.log(lines);
-        });
+        function fetchJSONData() {
+            fetch("coordinatesD3.json")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) =>
+                    console.log(data))
+                .catch((error) =>
+                    console.error("Unable to fetch data:", error));
+        }
+        fetchJSONData();
 
     </script>
 </body>
