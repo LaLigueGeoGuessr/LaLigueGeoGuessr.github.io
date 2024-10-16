@@ -1,1 +1,7 @@
-Avion de Ligne j3 -> S7 - D3 - J3 - Map 5 - Avion de Ligne J3
+
+  'S7 - Demi - Map 4.2 - Pêche aux points - NM',
+  'S7 - Petite Finale - Map 4.2 - Sky Tourelle - Joueurs Sol',
+  'S7 - Petite Finale - Map 5.2 - Voyage Express ',
+  'S7 - Finale - Map 4 - Tourelle - Move',
+  'S7 - Finale - Map 6 - Tri-force - J2',
+

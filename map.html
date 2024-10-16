@@ -29,6 +29,32 @@
             </div>
         </fieldset>
     </div>
+    <div id="filtres2">
+        <fieldset>          
+            <div>
+              <input type="checkbox" id="s1" name="s1" onclick="validateSaison()"/>
+              <label for="saisons">S1</label>
+              <br>
+              <input type="checkbox" id="s2" name="s2" onclick="validateSaison()"/>
+              <label for="saisons">S2</label>
+              <br>
+              <input type="checkbox" id="s3" name="s3" onclick="validateSaison()"/>
+              <label for="saisons">S3</label>
+              <br>
+              <input type="checkbox" id="s4" name="s4" onclick="validateSaison()"/>
+              <label for="saisons">S4</label>
+              <br>
+              <input type="checkbox" id="s5" name="s5" onclick="validateSaison()"/>
+              <label for="saisons">S5</label>
+              <br>
+              <input type="checkbox" id="s6" name="s6" onclick="validateSaison()"/>
+              <label for="saisons">S6</label>
+              <br>
+              <input type="checkbox" id="s7" name="s7" onclick="validateSaison()"/>
+              <label for="saisons">S7</label>
+            </div>
+        </fieldset>
+    </div>
     <script>
         var redIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -119,7 +145,57 @@
                     console.error("Unable to fetch data:", error));
         }
 
+        function fetchJSONData(saison) {
+            fetch("coordinatesAll.json")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    for(let i = 0; i < data.length; i++){
+                        if(saison === "S1" && (data[i].name.includes('S1'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+                        else if(saison === "S2" && (data[i].name.includes('S2'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+                        else if(saison === "S3" && (data[i].name.includes('S3'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+                        else if(saison === "S4" && (data[i].name.includes('S4'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+                        else if(saison === "S5" && (data[i].name.includes('S5'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+                        else if(saison === "S6" && (data[i].name.includes('S6'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+                        else if(saison === "S7" && (data[i].name.includes('S7'))){
+                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                            layerGroup.addLayer(marker);
+                        }
+
+                    }
+                    map.addLayer(layerGroup);
+                })   
+                .catch((error) =>
+                    console.error("Unable to fetch data:", error));
+        }
+
         function validate() {
+            if (map.hasLayer(layerGroup)) {
+                layerGroup.clearLayers();
+            }
             if (document.getElementById('div1').checked) {
                 fetchJSONData("D1");
             } 
@@ -129,6 +205,32 @@
             if (document.getElementById('div3').checked) {
                 fetchJSONData("D3");
             } 
+        }
+        function validateSaison() {
+            if (map.hasLayer(layerGroup)) {
+                layerGroup.clearLayers();
+            }
+            if (document.getElementById('s1').checked) {
+                fetchJSONDataSaison("S1");
+            } 
+            if (document.getElementById('s2').checked) {
+                fetchJSONDataSaison("S2");
+            }
+            if (document.getElementById('s3').checked) {
+                fetchJSONDataSaison("S3");
+            }
+            if (document.getElementById('s4').checked) {
+                fetchJSONDataSaison("S4");
+            }
+            if (document.getElementById('s5').checked) {
+                fetchJSONDataSaison("S5");
+            }
+            if (document.getElementById('s6').checked) {
+                fetchJSONDataSaison("S6");
+            }
+            if (document.getElementById('s7').checked) {
+                fetchJSONDataSaison("S7");
+            }
         }
 
     </script>
