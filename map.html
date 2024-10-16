@@ -53,8 +53,6 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         
-        var markers = L.markerClusterGroup();
-
         function fetchJSONDataAll() {
             fetch("coordinatesAll.json")
                 .then((res) => {
@@ -87,7 +85,6 @@
         }
         
         function fetchJSONData(div) {
-            markers.clearLayers();
             fetch("coordinatesAll.json")
                 .then((res) => {
                     if (!res.ok) {
@@ -99,19 +96,15 @@
                 .then((data) => {
                     for(let i = 0; i < data.length; i++){
                         if(div === "D1" && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                            var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                            markers.addLayer(marker);
+                            L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
                         }
                         else if(div === "D2" && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                            var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                            markers.addLayer(marker);
+                            L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
                         }
                         else if(div === "D3" && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).addTo(map).bindPopup(data[i].name);
-                            markers.addLayer(marker);
+                            L.marker([data[i].lat, data[i].lng]).addTo(map).bindPopup(data[i].name)
                         }
                     }
-                    map.addLayer(markers);
                 })   
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
