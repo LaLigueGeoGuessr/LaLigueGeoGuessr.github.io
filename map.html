@@ -145,7 +145,10 @@
                     console.error("Unable to fetch data:", error));
         }
 
-        function fetchJSONData(saison) {
+        function fetchJSONDataSaison(saison) {
+            if (map.hasLayer(layerGroup)) {
+                layerGroup.clearLayers();
+            }
             fetch("coordinatesAll.json")
                 .then((res) => {
                     if (!res.ok) {
@@ -193,9 +196,6 @@
         }
 
         function validate() {
-            if (map.hasLayer(layerGroup)) {
-                layerGroup.clearLayers();
-            }
             if (document.getElementById('div1').checked) {
                 fetchJSONData("D1");
             } 
@@ -207,9 +207,6 @@
             } 
         }
         function validateSaison() {
-            if (map.hasLayer(layerGroup)) {
-                layerGroup.clearLayers();
-            }
             if (document.getElementById('s1').checked) {
                 fetchJSONDataSaison("S1");
             } 
