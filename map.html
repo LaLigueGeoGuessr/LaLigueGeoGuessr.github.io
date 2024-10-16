@@ -91,16 +91,18 @@
                 .then((data) => {
                     for(let i = 0; i < data.length; i++){
                         if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                            L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
+                            //L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
                         }
                         else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                            L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
+                            //L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
                         }
                         else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                            L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
+                            //L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
                         }
                         else{
-                            console.log(data[i].name);
+                            if(!data[i].name.includes('J0') && !data[i].name.includes('S2') && !data[i].name.includes('S1')){
+                                console.log(data[i].name);
+                            }
                         }
                     }
                 })   
