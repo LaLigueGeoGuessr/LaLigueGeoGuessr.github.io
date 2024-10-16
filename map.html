@@ -12,6 +12,18 @@
 
 <body>
     <div id="map"></div>
+    <div id="filtres">
+        <fieldset>          
+            <div>
+              <input type="checkbox" id="div1" name="div1" onclick="validate()"/>
+              <label for="divisions">Division 1</label>
+              <input type="checkbox" id="div2" name="div2" onclick="validate()"/>
+              <label for="divisions">Division 2</label>
+              <input type="checkbox" id="div3" name="div3" onclick="validate()"/>
+              <label for="divisions">Division 3</label>
+            </div>
+        </fieldset>
+    </div>
     <script>
         var redIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -36,49 +48,6 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         
-
-        /*for(let i = 0; i < coords.length; i++){
-            L.marker([coords[i]["lat"], coords[i]["lng"]]).addTo(map).bindPopup(coords[i]["name"]);
-        }*/
-
-        /*function fetchJSONDataD3() {
-            fetch("coordinatesD3.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    for(let i = 0; i < data.length; i++){
-                        L.marker([data[i].lat, data[i].lng]).addTo(map).bindPopup(data[i].name)
-                    }
-                })   
-                .catch((error) =>
-                    console.error("Unable to fetch data:", error));
-        }
-        fetchJSONDataD3();
-
-        function fetchJSONDataD2() {
-            fetch("coordinatesD2.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    for(let i = 0; i < data.length; i++){
-                        L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
-                    }
-                })    
-                .catch((error) =>
-                    console.error("Unable to fetch data:", error));
-        }
-        fetchJSONDataD2();*/
-
         function fetchJSONDataAll() {
             fetch("coordinatesAll.json")
                 .then((res) => {
@@ -109,7 +78,44 @@
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
         }
-        fetchJSONDataAll();
+        
+        function fetchJSONData(div) {
+            fetch("coordinatesAll.json")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    for(let i = 0; i < data.length; i++){
+                        if(div === "D1" && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
+                            L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
+                        }
+                        else if(div === "D2" && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
+                            L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
+                        }
+                        else if(div === "D3" && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
+                            L.marker([data[i].lat, data[i].lng]).addTo(map).bindPopup(data[i].name)
+                        }
+                    }
+                })   
+                .catch((error) =>
+                    console.error("Unable to fetch data:", error));
+        }
+
+        function validate() {
+            if (document.getElementById('div1').checked) {
+                fetchJSONDataAll("D1");
+            } 
+            if (document.getElementById('div2').checked) {
+                fetchJSONDataAll("D2");
+            } 
+            if (document.getElementById('div3').checked) {
+                fetchJSONDataAll("D3");
+            } 
+        }
 
     </script>
 </body>
