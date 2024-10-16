@@ -1,1 +1,9 @@
 #map { height: 940px; }
+
+#filtres {
+    background-color: white;
+    position: absolute;
+    top: 800px;
+    left: 20px;
+    z-index: 9999;
+}
