@@ -3,7 +3,7 @@
 #filtres {
     background-color: white;
     position: absolute;
-    top: 400px;
+    top: 500px;
     left: 20px;
     z-index: 9999;
 }
@@ -15,3 +15,4 @@
     left: 20px;
     z-index: 9999;
 }
+
