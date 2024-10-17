@@ -271,33 +271,43 @@
                     for(let i = 0; i < data.length; i++){
                         if(filter === "S1"){
                             if(data[i].name.includes('S1')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
 
                         else if(filter === "S2"){
                             if(data[i].name.includes('S2')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
 
                         else if(filter === "S3"){
                             if(data[i].name.includes('S3')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
+                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D1S3"){
                             if(data[i].name.includes('S3') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
                         else if(filter === "D2S3"){
                             if(data[i].name.includes('S3') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
@@ -310,19 +320,29 @@
 
                         else if(filter === "S4"){
                             if(data[i].name.includes('S4')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
+                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D1S4"){
                             if(data[i].name.includes('S4') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
                         else if(filter === "D2S4"){
                             if(data[i].name.includes('S4') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
@@ -335,19 +355,29 @@
 
                         else if(filter === "S5"){
                             if(data[i].name.includes('S5')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
+                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D1S5"){
                             if(data[i].name.includes('S5') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
                         else if(filter === "D2S5"){
                             if(data[i].name.includes('S5') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
@@ -360,19 +390,29 @@
 
                         else if(filter === "S6"){
                             if(data[i].name.includes('S6')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
+                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D1S6"){
                             if(data[i].name.includes('S6') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
                         else if(filter === "D2S6"){
                             if(data[i].name.includes('S6') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
@@ -385,19 +425,29 @@
 
                         else if(filter === "S7"){
                             if(data[i].name.includes('S7')){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
+                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
+                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
+                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D1S7"){
                             if(data[i].name.includes('S7') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
                         else if(filter === "D2S7"){
                             if(data[i].name.includes('S7') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
+                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
@@ -583,66 +633,76 @@
             if (document.getElementById('allS3').checked) {
                 fetchJSONData("S3");
             }
-            else if (document.getElementById('div1S3').checked) {
-                fetchJSONData("D1S3");
-            }
-            else if (document.getElementById('div2S3').checked) {
-                fetchJSONData("D2S3");
-            }
-            else if (document.getElementById('div3S3').checked) {
-                fetchJSONData("D3S3");
+            else {
+                if (document.getElementById('div1S3').checked) {
+                    fetchJSONData("D1S3");
+                }
+                if (document.getElementById('div2S3').checked) {
+                    fetchJSONData("D2S3");
+                }
+                if (document.getElementById('div3S3').checked) {
+                    fetchJSONData("D3S3");
+                }
             }
 
             if (document.getElementById('allS4').checked) {
                 fetchJSONData("S4");
             }
-            else if (document.getElementById('div1S4').checked) {
-                fetchJSONData("D1S4");
-            }
-            else if (document.getElementById('div2S4').checked) {
-                fetchJSONData("D2S4");
-            }
-            else if (document.getElementById('div3S4').checked) {
-                fetchJSONData("D3S4");
+            else {
+                if (document.getElementById('div1S4').checked) {
+                    fetchJSONData("D1S4");
+                }
+                if (document.getElementById('div2S4').checked) {
+                    fetchJSONData("D2S4");
+                }
+                if (document.getElementById('div3S4').checked) {
+                    fetchJSONData("D3S4");
+                }
             }
 
             if (document.getElementById('allS5').checked) {
                 fetchJSONData("S5");
             }
-            else if (document.getElementById('div1S5').checked) {
-                fetchJSONData("D1S5");
-            }
-            else if (document.getElementById('div2S5').checked) {
-                fetchJSONData("D2S5");
-            }
-            else if (document.getElementById('div3S5').checked) {
-                fetchJSONData("D3S5");
+            else {
+                if (document.getElementById('div1S5').checked) {
+                    fetchJSONData("D1S5");
+                }
+                if (document.getElementById('div2S5').checked) {
+                    fetchJSONData("D2S5");
+                }
+                if (document.getElementById('div3S5').checked) {
+                    fetchJSONData("D3S5");
+                }
             }
 
             if (document.getElementById('allS6').checked) {
                 fetchJSONData("S6");
             }
-            else if (document.getElementById('div1S6').checked) {
-                fetchJSONData("D1S6");
-            }
-            else if (document.getElementById('div2S6').checked) {
-                fetchJSONData("D2S6");
-            }
-            else if (document.getElementById('div3S6').checked) {
-                fetchJSONData("D3S6");
+            else {
+                if (document.getElementById('div1S6').checked) {
+                    fetchJSONData("D1S6");
+                }
+                if (document.getElementById('div2S6').checked) {
+                    fetchJSONData("D2S6");
+                }
+                if (document.getElementById('div3S6').checked) {
+                    fetchJSONData("D3S6");
+                }
             }
 
             if (document.getElementById('allS7').checked) {
                 fetchJSONData("S7");
             }
-            else if (document.getElementById('div1S7').checked) {
-                fetchJSONData("D1S7");
-            }
-            else if (document.getElementById('div2S7').checked) {
-                fetchJSONData("D2S7");
-            }
-            else if (document.getElementById('div3S7').checked) {
-                fetchJSONData("D3S7");
+            else {
+                if (document.getElementById('div1S7').checked) {
+                    fetchJSONData("D1S7");
+                }
+                if (document.getElementById('div2S7').checked) {
+                    fetchJSONData("D2S7");
+                }
+                if (document.getElementById('div3S7').checked) {
+                    fetchJSONData("D3S7");
+                }
             }
 
         }
