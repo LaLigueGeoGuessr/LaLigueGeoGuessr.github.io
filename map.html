@@ -181,7 +181,7 @@
                     console.error("Unable to fetch data:", error));
         }
         
-        function fetchJSONData(div) {
+        function fetchJSONDataDiv(div) {
             fetch("coordinatesAll.json")
                 .then((res) => {
                     if (!res.ok) {
@@ -289,19 +289,19 @@
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S3D1"){
+                        else if(filter === "D1S3"){
                             if(data[i].name.includes('S3') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S3D2"){
+                        else if(filter === "D2S3"){
                             if(data[i].name.includes('S3') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S3D3"){
+                        else if(filter === "D3S3"){
                             if(data[i].name.includes('S3') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
@@ -314,19 +314,19 @@
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S4D1"){
+                        else if(filter === "D1S4"){
                             if(data[i].name.includes('S4') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S4D2"){
+                        else if(filter === "D2S4"){
                             if(data[i].name.includes('S4') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S4D3"){
+                        else if(filter === "D3S4"){
                             if(data[i].name.includes('S4') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
@@ -339,19 +339,19 @@
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S5D1"){
+                        else if(filter === "D1S5"){
                             if(data[i].name.includes('S5') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S5D2"){
+                        else if(filter === "D2S5"){
                             if(data[i].name.includes('S5') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S5D3"){
+                        else if(filter === "D3S5"){
                             if(data[i].name.includes('S5') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
@@ -364,19 +364,19 @@
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S6D1"){
+                        else if(filter === "D1S6"){
                             if(data[i].name.includes('S6') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S6D2"){
+                        else if(filter === "D2S6"){
                             if(data[i].name.includes('S6') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S6D3"){
+                        else if(filter === "D3S6"){
                             if(data[i].name.includes('S6') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
@@ -389,19 +389,19 @@
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S7D1"){
+                        else if(filter === "D1S7"){
                             if(data[i].name.includes('S7') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S7D2"){
+                        else if(filter === "D2S7"){
                             if(data[i].name.includes('S7') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
                             }  
                         }
-                        else if(filter === "S7D3"){
+                        else if(filter === "D3S7"){
                             if(data[i].name.includes('S7') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
                                 var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
                                 layerGroup.addLayer(marker);
@@ -416,13 +416,13 @@
 
         function validate() {
             if (document.getElementById('div1').checked) {
-                fetchJSONData("D1");
+                fetchJSONDataDiv("D1");
             } 
             if (document.getElementById('div2').checked) {
-                fetchJSONData("D2");
+                fetchJSONDataDiv("D2");
             } 
             if (document.getElementById('div3').checked) {
-                fetchJSONData("D3");
+                fetchJSONDataDiv("D3");
             } 
         }
         function validateSaison() {
@@ -496,6 +496,8 @@
                 document.getElementById('div3S6').checked = false;
                 document.getElementById('div3S7').checked = false;
             }
+
+            fetchData();
         }
 
         function checkBoxAllSeason(){
@@ -561,6 +563,8 @@
                 document.getElementById('div2S7').checked = false;
                 document.getElementById('div3S7').checked = false;
             }
+
+            fetchData();
         }
 
         function fetchData(){
