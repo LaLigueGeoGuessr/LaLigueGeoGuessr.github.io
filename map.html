@@ -75,51 +75,51 @@
                 <tr>
                     <td>S1</td>
                     <td><input type="checkbox" id="allS1" name="allS1" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S1" name="div1S1" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S1" name="div1S1" onclick="checkBoxSingle()"/></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>S2</td>
                     <td><input type="checkbox" id="allS2" name="allS2" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S2" name="div1S2" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S2" name="div1S2" onclick="checkBoxSingle()"/></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>S3</td>
                     <td><input type="checkbox" id="allS3" name="allS3" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S3" name="div1S3" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div2S3" name="div2S3" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div3S3" name="div3S3" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S3" name="div1S3" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div2S3" name="div2S3" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div3S3" name="div3S3" onclick="checkBoxSingle()"/></td>
                 </tr>
                 <tr>
                     <td>S4</td>
                     <td><input type="checkbox" id="allS4" name="allS4" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S4" name="div1S4" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div2S4" name="div2S4" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div3S4" name="div3S4" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S4" name="div1S4" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div2S4" name="div2S4" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div3S4" name="div3S4" onclick="checkBoxSingle()"/></td>
                 </tr>
                 <tr>
                     <td>S5</td>
                     <td><input type="checkbox" id="allS5" name="allS5" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S5" name="div1S5" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div2S5" name="div2S5" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div3S5" name="div3S5" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S5" name="div1S5" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div2S5" name="div2S5" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div3S5" name="div3S5" onclick="checkBoxSingle()"/></td>
                 </tr>
                 <tr>
                     <td>S6</td>
                     <td><input type="checkbox" id="allS6" name="allS6" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S6" name="div1S6" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div2S6" name="div2S6" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div3S6" name="div3S6" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S6" name="div1S6" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div2S6" name="div2S6" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div3S6" name="div3S6" onclick="checkBoxSingle()"/></td>
                 </tr>
                 <tr>
                     <td>S7</td>
                     <td><input type="checkbox" id="allS7" name="allS7" onclick="checkBoxAllSeason()"/></td>
-                    <td><input type="checkbox" id="div1S7" name="div1S7" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div2S7" name="div2S7" onclick="fetchData()"/></td>
-                    <td><input type="checkbox" id="div3S7" name="div3S7" onclick="fetchData()"/></td>
+                    <td><input type="checkbox" id="div1S7" name="div1S7" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div2S7" name="div2S7" onclick="checkBoxSingle()"/></td>
+                    <td><input type="checkbox" id="div3S7" name="div3S7" onclick="checkBoxSingle()"/></td>
                 </tr>
             </table>
         </fieldset>
@@ -502,7 +502,9 @@
         function checkBoxAllDiv(){
             if (document.getElementById('div1All').checked) {
                 document.getElementById('div1S1').checked = true;
+                document.getElementById('allS1').checked = true;
                 document.getElementById('div1S2').checked = true;
+                document.getElementById('allS2').checked = true;
                 document.getElementById('div1S3').checked = true;
                 document.getElementById('div1S4').checked = true;
                 document.getElementById('div1S5').checked = true;
@@ -511,7 +513,9 @@
             }
             else if (!document.getElementById('div1All').checked) {
                 document.getElementById('div1S1').checked = false;
+                document.getElementById('allS1').checked = false;
                 document.getElementById('div1S2').checked = false;
+                document.getElementById('allS2').checked = false;
                 document.getElementById('div1S3').checked = false;
                 document.getElementById('div1S4').checked = false;
                 document.getElementById('div1S5').checked = false;
@@ -613,6 +617,133 @@
                 document.getElementById('div2S7').checked = false;
                 document.getElementById('div3S7').checked = false;
             }
+
+            fetchData();
+        }
+
+        function checkBoxSingle(){
+            if (map.hasLayer(layerGroup)) {
+                layerGroup.clearLayers();
+            }
+
+            if (document.getElementById('div1S1').checked) {
+                document.getElementById('allS1').checked = true;
+            }
+            else if (!document.getElementById('div1S1').checked) {
+                document.getElementById('allS1').checked = false;
+            }
+
+            if (document.getElementById('div1S2').checked) {
+                document.getElementById('allS2').checked = true;
+            }
+            else if (!document.getElementById('div1S2').checked) {
+                document.getElementById('allS2').checked = false;
+            }
+
+            if (!document.getElementById('div1S3').checked && document.getElementById('allS3').checked) {
+                document.getElementById('allS3').checked = false;
+            }
+            if (!document.getElementById('div2S3').checked && document.getElementById('allS3').checked) {
+                document.getElementById('allS3').checked = false;
+            }
+            if (!document.getElementById('div3S3').checked && document.getElementById('allS3').checked) {
+                document.getElementById('allS3').checked = false;
+            }
+
+            if (!document.getElementById('div1S4').checked && document.getElementById('allS4').checked) {
+                document.getElementById('allS4').checked = false;
+            }
+            if (!document.getElementById('div2S4').checked && document.getElementById('allS4').checked) {
+                document.getElementById('allS4').checked = false;
+            }
+            if (!document.getElementById('div3S4').checked && document.getElementById('allS4').checked) {
+                document.getElementById('allS4').checked = false;
+            }
+
+            if (!document.getElementById('div1S5').checked && document.getElementById('allS5').checked) {
+                document.getElementById('allS5').checked = false;
+            }
+            if (!document.getElementById('div2S5').checked && document.getElementById('allS5').checked) {
+                document.getElementById('allS5').checked = false;
+            }
+            if (!document.getElementById('div3S5').checked && document.getElementById('allS5').checked) {
+                document.getElementById('allS5').checked = false;
+            }
+
+            if (!document.getElementById('div1S6').checked && document.getElementById('allS6').checked) {
+                document.getElementById('allS6').checked = false;
+            }
+            if (!document.getElementById('div2S6').checked && document.getElementById('allS6').checked) {
+                document.getElementById('allS6').checked = false;
+            }
+            if (!document.getElementById('div3S6').checked && document.getElementById('allS6').checked) {
+                document.getElementById('allS6').checked = false;
+            }
+
+            if (!document.getElementById('div1S7').checked && document.getElementById('allS7').checked) {
+                document.getElementById('allS7').checked = false;
+            }
+            if (!document.getElementById('div2S7').checked && document.getElementById('allS7').checked) {
+                document.getElementById('allS7').checked = false;
+            }
+            if (!document.getElementById('div3S7').checked && document.getElementById('allS7').checked) {
+                document.getElementById('allS7').checked = false;
+            }
+
+            if (!document.getElementById('div1S1').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+            if (!document.getElementById('div1S2').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+            if (!document.getElementById('div1S3').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+            if (!document.getElementById('div1S4').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+            if (!document.getElementById('div1S5').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+            if (!document.getElementById('div1S6').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+            if (!document.getElementById('div1S7').checked && document.getElementById('div1All').checked) {
+                document.getElementById('div1All').checked = false;
+            }
+
+            if (!document.getElementById('div2S3').checked && document.getElementById('div2All').checked) {
+                document.getElementById('div2All').checked = false;
+            }
+            if (!document.getElementById('div2S4').checked && document.getElementById('div2All').checked) {
+                document.getElementById('div2All').checked = false;
+            }
+            if (!document.getElementById('div2S5').checked && document.getElementById('div2All').checked) {
+                document.getElementById('div2All').checked = false;
+            }
+            if (!document.getElementById('div2S6').checked && document.getElementById('div2All').checked) {
+                document.getElementById('div2All').checked = false;
+            }
+            if (!document.getElementById('div2S7').checked && document.getElementById('div2All').checked) {
+                document.getElementById('div2All').checked = false;
+            }
+
+            if (!document.getElementById('div3S3').checked && document.getElementById('div3All').checked) {
+                document.getElementById('div3All').checked = false;
+            }
+            if (!document.getElementById('div3S4').checked && document.getElementById('div3All').checked) {
+                document.getElementById('div3All').checked = false;
+            }
+            if (!document.getElementById('div3S5').checked && document.getElementById('div3All').checked) {
+                document.getElementById('div3All').checked = false;
+            }
+            if (!document.getElementById('div3S6').checked && document.getElementById('div3All').checked) {
+                document.getElementById('div3All').checked = false;
+            }
+            if (!document.getElementById('div3S7').checked && document.getElementById('div3All').checked) {
+                document.getElementById('div3All').checked = false;
+            }
+
 
             fetchData();
         }
