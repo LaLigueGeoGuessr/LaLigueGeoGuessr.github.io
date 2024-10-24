@@ -16,17 +16,17 @@
     z-index: 9999;
 }
 
-#filtresAll {
+#display {
     background-color: white;
     position: absolute;
-    top: 600px;
+    top: 350px;
     left: 20px;
     z-index: 9999;
     border: 0.25em solid black;
     padding: 5px;
 }
 
-#display {
+#competition {
     background-color: white;
     position: absolute;
     top: 450px;
@@ -36,7 +36,33 @@
     padding: 5px;
 }
 
+#filtresAll {
+    background-color: white;
+    position: absolute;
+    top: 550px;
+    left: 20px;
+    z-index: 9999;
+    border: 0.25em solid black;
+    padding: 5px;
+}
+
+#filtresCactus {
+    display: none;
+    background-color: white;
+    position: absolute;
+    top: 550px;
+    left: 20px;
+    z-index: 9999;
+    border: 0.25em solid black;
+    padding: 5px;
+}
+
 #display p{
+    font-weight: bold;
+    margin: 5px 0px 5px 2px;
+}
+
+#competition p{
     font-weight: bold;
     margin: 5px 0px 5px 2px;
 }

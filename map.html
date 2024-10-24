@@ -57,6 +57,24 @@
         </fieldset>
     </div>-->
     
+    <div id="display">
+        <p>Affichage</p>
+        <input type="radio" id="marker" name="display" checked onclick="changeDisplay()"/>
+        <label for="divisions">Tous les marqueurs</label>
+        <br>
+        <input type="radio" id="cluster" name="display" onclick="changeDisplay()"/>
+        <label for="divisions">Clusters</label>
+    </div>
+
+    <div id="competition">
+        <p>Compétition</p>
+        <input type="radio" id="ligue" name="competition" checked onclick="changeCompetition(this)"/>
+        <label for="divisions">La Ligue</label>
+        <br>
+        <input type="radio" id="cactus" name="competition" onclick="changeCompetition(this)"/>
+        <label for="divisions">Cactus Ligue</label>
+    </div>
+
     <div id="filtresAll">
         <p>Filtres</p>
         <table>
@@ -126,16 +144,57 @@
         </table>
     </div>
     
-    <div id="display">
-        <p>Affichage</p>
-        <input type="radio" id="marker" name="display" checked onclick="changeDisplay()"/>
-        <label for="divisions">Tous les marqueurs</label>
-        <br>
-        <input type="radio" id="cluster" name="display" onclick="changeDisplay()"/>
-        <label for="divisions">Clusters</label>
+    <div id="filtresCactus">
+        <p>Filtres</p>
+        <table>
+            <tr>
+                <td></td>
+                <td><input type="checkbox" id="cactusAll" name="cactusAll" onclick="checkBoxAllCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S1</td>
+                <td><input type="checkbox" id="cactusS1" name="cactusS1" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S2</td>
+                <td><input type="checkbox" id="cactusS2" name="cactusS2" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S3</td>
+                <td><input type="checkbox" id="cactusS3" name="cactusS3" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S4</td>
+                <td><input type="checkbox" id="cactusS4" name="cactusS4" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S5</td>
+                <td><input type="checkbox" id="cactusS5" name="cactusS5" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S6</td>
+                <td><input type="checkbox" id="cactusS6" name="cactusS6" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+            <tr>
+                <td>S7</td>
+                <td><input type="checkbox" id="cactusS7" name="cactusS7" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
+        </table>
     </div>
-    
+
     <script>
+        function getGoogleLink(lat, lng, panoId, heading, pitch, zoom){
+            let fov = 90;
+            if (zoom !=null) {
+                fov = 180 / Math.pow(2, Math.min(Math.max(zoom, 0), 4));
+            }
+            if (panoId != null) {
+                return "https://www.google.com/maps/@?api=1&map_action=pano&pano=" + panoId + "&viewpoint=" + lat + "," + lng + "&heading=" + heading + "&pitch=" + pitch + "&fov=" + fov;
+            } else {
+                return "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=" + lat + "," + lng + "&heading=" + heading + "&pitch=" + pitch + "&fov=" + fov;
+            }
+        }
+
         var redIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -282,191 +341,255 @@
                 .then((data) => {
                     for(let i = 0; i < data.length; i++){
                         if(filter === "S1"){
-                            if(data[i].name.includes('S1')){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S1')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
 
                         else if(filter === "S2"){
-                            if(data[i].name.includes('S2')){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S2')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
 
                         else if(filter === "S3"){
-                            if(data[i].name.includes('S3')){
-                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S3')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
                             }  
                         }
                         else if(filter === "D1S3"){
-                            if(data[i].name.includes('S3') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S3') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D2S3"){
-                            if(data[i].name.includes('S3') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S3') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D3S3"){
-                            if(data[i].name.includes('S3') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S3') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
 
                         else if(filter === "S4"){
-                            if(data[i].name.includes('S4')){
-                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S4')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
                             }  
                         }
                         else if(filter === "D1S4"){
-                            if(data[i].name.includes('S4') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S4') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D2S4"){
-                            if(data[i].name.includes('S4') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S4') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D3S4"){
-                            if(data[i].name.includes('S4') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S4') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
 
                         else if(filter === "S5"){
-                            if(data[i].name.includes('S5')){
-                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S5')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
                             }  
                         }
                         else if(filter === "D1S5"){
-                            if(data[i].name.includes('S5') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S5') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D2S5"){
-                            if(data[i].name.includes('S5') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S5') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D3S5"){
-                            if(data[i].name.includes('S5') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S5') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
 
                         else if(filter === "S6"){
-                            if(data[i].name.includes('S6')){
-                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S6')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
                             }  
                         }
                         else if(filter === "D1S6"){
-                            if(data[i].name.includes('S6') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S6') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D2S6"){
-                            if(data[i].name.includes('S6') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S6') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D3S6"){
-                            if(data[i].name.includes('S6') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S6') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
 
                         else if(filter === "S7"){
-                            if(data[i].name.includes('S7')){
-                                if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S7')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                                    var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
-                                else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                                    var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                    layerGroup.addLayer(marker);
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
                                 }
                             }  
                         }
                         else if(filter === "D1S7"){
-                            if(data[i].name.includes('S7') && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S7') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D2S7"){
-                            if(data[i].name.includes('S7') && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                                var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S7') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                         else if(filter === "D3S7"){
-                            if(data[i].name.includes('S7') && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                                var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                                layerGroup.addLayer(marker);
+                            if(data[i][1].includes('S7') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
                             }  
                         }
                     }
@@ -475,6 +598,87 @@
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
         }
+
+        function fetchJSONDataCactus(filter){
+            fetch("coordinatesCactus.json")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    for(let i = 0; i < data.length; i++){
+                        if(filter === "S1"){
+                            if(data[i][1].includes('S1')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+
+                        else if(filter === "S2"){
+                            if(data[i][1].includes('S2')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+
+                        else if(filter === "S3"){
+                            if(data[i][1].includes('S3')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+
+                        else if(filter === "S4"){
+                            if(data[i][1].includes('S4')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+
+                        else if(filter === "S5"){
+                            if(data[i][1].includes('S5')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+
+                        else if(filter === "S6"){
+                            if(data[i][1].includes('S6')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+
+                        else if(filter === "S7"){
+                            if(data[i][1].includes('S7')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+                    }
+                    map.addLayer(layerGroup);
+                })   
+                .catch((error) =>
+                    console.error("Unable to fetch data:", error));
+        }
+
 
         function validate() {
             if (document.getElementById('div1').checked) {
@@ -523,8 +727,28 @@
             else if(document.getElementById('cluster').checked){
                 layerGroup = L.markerClusterGroup();
             }
-            
-            fetchData();
+
+            if(document.getElementById('ligue').checked){
+                fetchData();
+            }
+            else if(document.getElementById('cactus').checked){
+                fetchDataCactus();
+            }
+        }
+
+        function changeCompetition(elem){
+            var id = elem.id;
+
+            if(id === 'ligue'){
+                document.getElementById('filtresCactus').style.display = 'none';
+                document.getElementById('filtresAll').style.display = 'block';
+                fetchData();
+            }
+            else if(id === 'cactus'){
+                document.getElementById('filtresCactus').style.display = 'block';
+                document.getElementById('filtresAll').style.display = 'none';
+                fetchDataCactus();
+            }
         }
 
         function checkBoxAllDiv(elem){
@@ -887,6 +1111,42 @@
             fetchData();
         }
 
+        function checkBoxAllCactus(elem){
+            var id = elem.id;
+
+            if (elem.checked) {
+                document.getElementById('cactusS1').checked = true;
+                document.getElementById('cactusS2').checked = true;
+                document.getElementById('cactusS3').checked = true;
+                document.getElementById('cactusS4').checked = true;
+                document.getElementById('cactusS5').checked = true;
+                document.getElementById('cactusS6').checked = true;
+                document.getElementById('cactusS7').checked = true;
+            }
+            else if (!elem.checked) {
+                document.getElementById('cactusS1').checked = false;
+                document.getElementById('cactusS2').checked = false;
+                document.getElementById('cactusS3').checked = false;
+                document.getElementById('cactusS4').checked = false;
+                document.getElementById('cactusS5').checked = false;
+                document.getElementById('cactusS6').checked = false;
+                document.getElementById('cactusS7').checked = false;
+            }
+
+            fetchDataCactus();
+        }
+
+        function checkBoxAllSeasonCactus(elem){
+            var id = elem.id;
+
+            if (!elem.checked && document.getElementById('cactusAll').checked) {
+                document.getElementById('cactusAll').checked = false;
+            }
+
+            fetchDataCactus();
+        }
+
+
         function fetchData(){
             if (map.hasLayer(layerGroup)) {
                 layerGroup.clearLayers();
@@ -975,6 +1235,40 @@
                 }
             }
 
+        }
+
+        function fetchDataCactus(){
+            if (map.hasLayer(layerGroup)) {
+                layerGroup.clearLayers();
+            }
+
+            if (document.getElementById('cactusS1').checked) {
+                fetchJSONDataCactus("S1");
+            }
+
+            if (document.getElementById('cactusS2').checked) {
+                fetchJSONDataCactus("S2");
+            }
+
+            if (document.getElementById('cactusS3').checked) {
+                fetchJSONDataCactus("S3");
+            }
+
+            if (document.getElementById('cactusS4').checked) {
+                fetchJSONDataCactus("S4");
+            }
+
+            if (document.getElementById('cactusS5').checked) {
+                fetchJSONDataCactus("S5");
+            }
+
+            if (document.getElementById('cactusS6').checked) {
+                fetchJSONDataCactus("S6");
+            }
+
+            if (document.getElementById('cactusS7').checked) {
+                fetchJSONDataCactus("S7");
+            }
         }
 
     </script>
