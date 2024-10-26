@@ -1,20 +1,5 @@
 #map { height: 940px; }
 
-#filtres {
-    background-color: white;
-    position: absolute;
-    top: 400px;
-    left: 20px;
-    z-index: 9999;
-}
-
-#filtres2 {
-    background-color: white;
-    position: absolute;
-    top: 500px;
-    left: 20px;
-    z-index: 9999;
-}
 
 #display {
     background-color: white;

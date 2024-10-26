@@ -10,52 +10,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
     <link rel="stylesheet" href="map.css">
 </head>
 
 <body>
     <div id="map"></div>
-    
-    <!--<div id="filtres">
-        <fieldset>          
-            <div>
-              <input type="checkbox" id="div1" name="div1" onclick="validate()"/>
-              <label for="divisions">Division 1</label>
-              <br>
-              <input type="checkbox" id="div2" name="div2" onclick="validate()"/>
-              <label for="divisions">Division 2</label>
-              <br>
-              <input type="checkbox" id="div3" name="div3" onclick="validate()"/>
-              <label for="divisions">Division 3</label>
-            </div>
-        </fieldset>
-    </div>
-    <div id="filtres2">
-        <fieldset>          
-            <div>
-              <input type="checkbox" id="s1" name="s1" onclick="validateSaison()"/>
-              <label for="saisons">S1</label>
-              <br>
-              <input type="checkbox" id="s2" name="s2" onclick="validateSaison()"/>
-              <label for="saisons">S2</label>
-              <br>
-              <input type="checkbox" id="s3" name="s3" onclick="validateSaison()"/>
-              <label for="saisons">S3</label>
-              <br>
-              <input type="checkbox" id="s4" name="s4" onclick="validateSaison()"/>
-              <label for="saisons">S4</label>
-              <br>
-              <input type="checkbox" id="s5" name="s5" onclick="validateSaison()"/>
-              <label for="saisons">S5</label>
-              <br>
-              <input type="checkbox" id="s6" name="s6" onclick="validateSaison()"/>
-              <label for="saisons">S6</label>
-              <br>
-              <input type="checkbox" id="s7" name="s7" onclick="validateSaison()"/>
-              <label for="saisons">S7</label>
-            </div>
-        </fieldset>
-    </div>-->
     
     <div id="display">
         <p>Affichage</p>
@@ -219,115 +179,8 @@
         }).addTo(map);
         
         var cluster = false;
-        var layerGroup = L.layerGroup();
-
-        function fetchJSONDataAll() {
-            fetch("coordinatesAll.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    for(let i = 0; i < data.length; i++){
-                        if(data[i].name.includes('L1') || data[i].name.includes('D1')){
-                            L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).addTo(map).bindPopup(data[i].name)
-                        }
-                        else if(data[i].name.includes('L2') || data[i].name.includes('D2')){
-                            L.marker([data[i].lat, data[i].lng], {icon: redIcon}).addTo(map).bindPopup(data[i].name)
-                        }
-                        else if(data[i].name.includes('L3') || data[i].name.includes('D3')){
-                            L.marker([data[i].lat, data[i].lng]).addTo(map).bindPopup(data[i].name)
-                        }
-                        else{
-                            if(!data[i].name.includes('J0') && !data[i].name.includes('S2') && !data[i].name.includes('S1')){
-                                console.log(data[i].name);
-                            }
-                        }
-                    }
-                })   
-                .catch((error) =>
-                    console.error("Unable to fetch data:", error));
-        }
-        
-        function fetchJSONDataDiv(div) {
-            fetch("coordinatesAll.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    for(let i = 0; i < data.length; i++){
-                        if(div === "D1" && (data[i].name.includes('L1') || data[i].name.includes('D1'))){
-                            var marker = L.marker([data[i].lat, data[i].lng], {icon: greenIcon}).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(div === "D2" && (data[i].name.includes('L2') || data[i].name.includes('D2'))){
-                            var marker = L.marker([data[i].lat, data[i].lng], {icon: redIcon}).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(div === "D3" && (data[i].name.includes('L3') || data[i].name.includes('D3'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                    }
-                    map.addLayer(layerGroup);
-                })   
-                .catch((error) =>
-                    console.error("Unable to fetch data:", error));
-        }
-
-        function fetchJSONDataSeason(saison) {
-            fetch("coordinatesAll.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    for(let i = 0; i < data.length; i++){
-                        if(saison === "S1" && (data[i].name.includes('S1'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(saison === "S2" && (data[i].name.includes('S2'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(saison === "S3" && (data[i].name.includes('S3'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(saison === "S4" && (data[i].name.includes('S4'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(saison === "S5" && (data[i].name.includes('S5'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(saison === "S6" && (data[i].name.includes('S6'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-                        else if(saison === "S7" && (data[i].name.includes('S7'))){
-                            var marker = L.marker([data[i].lat, data[i].lng]).bindPopup(data[i].name);
-                            layerGroup.addLayer(marker);
-                        }
-
-                    }
-                    map.addLayer(layerGroup);
-                })   
-                .catch((error) =>
-                    console.error("Unable to fetch data:", error));
-        }
+        var layers = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
+        var layersCactus = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
 
         function fetchJSONData(filter){
             fetch("coordinatesAll.json")
@@ -344,18 +197,20 @@
                             if(data[i][1].includes('S1')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[0].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[0]);
                         }
 
                         else if(filter === "S2"){
                             if(data[i][1].includes('S2')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[1].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[1]);
                         }
 
                         else if(filter === "S3"){
@@ -363,46 +218,52 @@
                                 if(data[i][1].includes('L1') || data[i][1].includes('D1')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[2].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[3].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[4].addLayer(marker);
                                     }
                                 }
                             }  
+                            map.addLayer(layers[2]);
+                            map.addLayer(layers[3]);
+                            map.addLayer(layers[4]);
                         }
                         else if(filter === "D1S3"){
                             if(data[i][1].includes('S3') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[2].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[2]);
                         }
                         else if(filter === "D2S3"){
                             if(data[i][1].includes('S3') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[3].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[3]);
                         }
                         else if(filter === "D3S3"){
                             if(data[i][1].includes('S3') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[4].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[4]);
                         }
 
                         else if(filter === "S4"){
@@ -410,46 +271,52 @@
                                 if(data[i][1].includes('L1') || data[i][1].includes('D1')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[5].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[6].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[7].addLayer(marker);
                                     }
                                 }
                             }  
+                            map.addLayer(layers[5]);
+                            map.addLayer(layers[6]);
+                            map.addLayer(layers[7]);
                         }
                         else if(filter === "D1S4"){
                             if(data[i][1].includes('S4') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[5].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[5]);
                         }
                         else if(filter === "D2S4"){
                             if(data[i][1].includes('S4') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[6].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[6]);
                         }
                         else if(filter === "D3S4"){
                             if(data[i][1].includes('S4') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[7].addLayer(marker);
                                 }
-                            }  
+                            } 
+                            map.addLayer(layers[7]); 
                         }
 
                         else if(filter === "S5"){
@@ -457,46 +324,52 @@
                                 if(data[i][1].includes('L1') || data[i][1].includes('D1')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[8].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[9].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[10].addLayer(marker);
                                     }
                                 }
                             }  
+                            map.addLayer(layers[8]);
+                            map.addLayer(layers[9]);
+                            map.addLayer(layers[10]);
                         }
                         else if(filter === "D1S5"){
                             if(data[i][1].includes('S5') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[8].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[8]);
                         }
                         else if(filter === "D2S5"){
                             if(data[i][1].includes('S5') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[9].addLayer(marker);
                                 }
-                            }  
+                            } 
+                            map.addLayer(layers[9]); 
                         }
                         else if(filter === "D3S5"){
                             if(data[i][1].includes('S5') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[10].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[10]);
                         }
 
                         else if(filter === "S6"){
@@ -504,46 +377,52 @@
                                 if(data[i][1].includes('L1') || data[i][1].includes('D1')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[11].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[12].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[13].addLayer(marker);
                                     }
                                 }
                             }  
+                            map.addLayer(layers[11]);
+                            map.addLayer(layers[12]);
+                            map.addLayer(layers[13]);
                         }
                         else if(filter === "D1S6"){
                             if(data[i][1].includes('S6') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[11].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[11]);
                         }
                         else if(filter === "D2S6"){
                             if(data[i][1].includes('S6') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[12].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[12]);
                         }
                         else if(filter === "D3S6"){
                             if(data[i][1].includes('S6') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[13].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[13]);
                         }
 
                         else if(filter === "S7"){
@@ -551,49 +430,55 @@
                                 if(data[i][1].includes('L1') || data[i][1].includes('D1')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[14].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[15].addLayer(marker);
                                     }
                                 }
                                 else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
                                     for(let j = 0; j < 5; j++){
                                         var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                        layerGroup.addLayer(marker);
+                                        layers[16].addLayer(marker);
                                     }
                                 }
                             }  
+                            map.addLayer(layers[14]);
+                            map.addLayer(layers[15]);
+                            map.addLayer(layers[16]);
                         }
                         else if(filter === "D1S7"){
                             if(data[i][1].includes('S7') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[14].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layers[14]);
                         }
                         else if(filter === "D2S7"){
                             if(data[i][1].includes('S7') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[15].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[15]);  
                         }
                         else if(filter === "D3S7"){
                             if(data[i][1].includes('S7') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layers[16].addLayer(marker);
                                 }
-                            }  
+                            }
+                            map.addLayer(layers[16]);  
                         }
                     }
-                    map.addLayer(layerGroup);
+                    //map.addLayer(layerGroup);
                 })   
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
@@ -614,107 +499,77 @@
                             if(data[i][1].includes('S1')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[0].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layersCactus[0]);
                         }
 
                         else if(filter === "S2"){
                             if(data[i][1].includes('S2')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[1].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layersCactus[1]);
                         }
 
                         else if(filter === "S3"){
                             if(data[i][1].includes('S3')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[2].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layersCactus[2]);
                         }
 
                         else if(filter === "S4"){
                             if(data[i][1].includes('S4')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[3].addLayer(marker);
                                 }
-                            }  
+                            } 
+                            map.addLayer(layersCactus[3]); 
                         }
 
                         else if(filter === "S5"){
                             if(data[i][1].includes('S5')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[4].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layersCactus[4]);
                         }
 
                         else if(filter === "S6"){
                             if(data[i][1].includes('S6')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[5].addLayer(marker);
                                 }
-                            }  
+                            } 
+                            map.addLayer(layersCactus[5]); 
                         }
 
                         else if(filter === "S7"){
                             if(data[i][1].includes('S7')){
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
-                                    layerGroup.addLayer(marker);
+                                    layersCactus[6].addLayer(marker);
                                 }
                             }  
+                            map.addLayer(layersCactus[6]);
                         }
                     }
-                    map.addLayer(layerGroup);
                 })   
                 .catch((error) =>
                     console.error("Unable to fetch data:", error));
         }
 
-
-        function validate() {
-            if (document.getElementById('div1').checked) {
-                fetchJSONDataDiv("D1");
-            } 
-            if (document.getElementById('div2').checked) {
-                fetchJSONDataDiv("D2");
-            } 
-            if (document.getElementById('div3').checked) {
-                fetchJSONDataDiv("D3");
-            } 
-        }
-        
-        function validateSaison() {
-            if (document.getElementById('s1').checked) {
-                fetchJSONDataSeason("S1");
-            } 
-            if (document.getElementById('s2').checked) {
-                fetchJSONDataSeason("S2");
-            }
-            if (document.getElementById('s3').checked) {
-                fetchJSONDataSeason("S3");
-            }
-            if (document.getElementById('s4').checked) {
-                fetchJSONDataSeason("S4");
-            }
-            if (document.getElementById('s5').checked) {
-                fetchJSONDataSeason("S5");
-            }
-            if (document.getElementById('s6').checked) {
-                fetchJSONDataSeason("S6");
-            }
-            if (document.getElementById('s7').checked) {
-                fetchJSONDataSeason("S7");
-            }
-        }
 
         function changeDisplay(){
             if (map.hasLayer(layerGroup)) {
@@ -811,6 +666,38 @@
                     document.getElementById('div3S7').checked = false;
                 }
             }
+            if(document.getElementById('div1S3').checked && document.getElementById('div2S3').checked && document.getElementById('div3S3').checked){
+                document.getElementById('allS3').checked = true;
+            }
+            if(document.getElementById('div1S4').checked && document.getElementById('div2S4').checked && document.getElementById('div3S4').checked){
+                document.getElementById('allS4').checked = true;
+            }
+            if(document.getElementById('div1S5').checked && document.getElementById('div2S5').checked && document.getElementById('div3S5').checked){
+                document.getElementById('allS5').checked = true;
+            }
+            if(document.getElementById('div1S6').checked && document.getElementById('div2S6').checked && document.getElementById('div3S6').checked){
+                document.getElementById('allS6').checked = true;
+            }
+            if(document.getElementById('div1S7').checked && document.getElementById('div2S7').checked && document.getElementById('div3S7').checked){
+                document.getElementById('allS7').checked = true;
+            }
+
+            if(!document.getElementById('div1S3').checked || !document.getElementById('div2S3').checked || !document.getElementById('div3S3').checked){
+                document.getElementById('allS3').checked = false;
+            }
+            if(!document.getElementById('div1S4').checked || !document.getElementById('div2S4').checked || !document.getElementById('div3S4').checked){
+                document.getElementById('allS4').checked = false;
+            }
+            if(!document.getElementById('div1S5').checked || !document.getElementById('div2S5').checked || !document.getElementById('div3S5').checked){
+                document.getElementById('allS5').checked = false;
+            }
+            if(!document.getElementById('div1S6').checked || !document.getElementById('div2S6').checked || !document.getElementById('div3S6').checked){
+                document.getElementById('allS6').checked = false;
+            }
+            if(!document.getElementById('div1S7').checked || !document.getElementById('div2S7').checked || !document.getElementById('div3S7').checked){
+                document.getElementById('allS7').checked = false;
+            }
+
             fetchData();
         }
 
@@ -898,6 +785,26 @@
                     document.getElementById('div2S7').checked = false;
                     document.getElementById('div3S7').checked = false;
                 }
+            }
+
+            if(document.getElementById('div1S1').checked && document.getElementById('div1S2').checked && document.getElementById('div1S3').checked && document.getElementById('div1S4').checked && document.getElementById('div1S5').checked && document.getElementById('div1S6').checked && document.getElementById('div1S7').checked){
+                document.getElementById('div1All').checked = true;
+            }
+            if(document.getElementById('div2S3').checked && document.getElementById('div2S4').checked && document.getElementById('div2S5').checked && document.getElementById('div2S6').checked && document.getElementById('div2S7').checked){
+                document.getElementById('div2All').checked = true;
+            }
+            if(document.getElementById('div3S3').checked && document.getElementById('div3S4').checked && document.getElementById('div3S5').checked && document.getElementById('div3S6').checked && document.getElementById('div3S7').checked){
+                document.getElementById('div3All').checked = true;
+            }
+
+            if(!document.getElementById('div1S1').checked || !document.getElementById('div1S2').checked || !document.getElementById('div1S3').checked || !document.getElementById('div1S4').checked || !document.getElementById('div1S5').checked || !document.getElementById('div1S6').checked || !document.getElementById('div1S7').checked){
+                document.getElementById('div1All').checked = false;
+            }
+            if(!document.getElementById('div2S3').checked || !document.getElementById('div2S4').checked || !document.getElementById('div2S5').checked || !document.getElementById('div2S6').checked || !document.getElementById('div2S7').checked){
+                document.getElementById('div2All').checked = false;
+            }
+            if(!document.getElementById('div3S3').checked || !document.getElementById('div3S4').checked || !document.getElementById('div3S5').checked || !document.getElementById('div3S6').checked || !document.getElementById('div3S7').checked){
+                document.getElementById('div3All').checked = false;
             }
 
             fetchData();
@@ -1108,6 +1015,16 @@
                 }
             }
 
+            if(document.getElementById('div1S1').checked && document.getElementById('div1S2').checked && document.getElementById('div1S3').checked && document.getElementById('div1S4').checked && document.getElementById('div1S5').checked && document.getElementById('div1S6').checked && document.getElementById('div1S7').checked){
+                document.getElementById('div1All').checked = true;
+            }
+            if(document.getElementById('div2S3').checked && document.getElementById('div2S4').checked && document.getElementById('div2S5').checked && document.getElementById('div2S6').checked && document.getElementById('div2S7').checked){
+                document.getElementById('div2All').checked = true;
+            }
+            if(document.getElementById('div3S3').checked && document.getElementById('div3S4').checked && document.getElementById('div3S5').checked && document.getElementById('div3S6').checked && document.getElementById('div3S7').checked){
+                document.getElementById('div3All').checked = true;
+            }
+
             fetchData();
         }
 
@@ -1148,16 +1065,26 @@
 
 
         function fetchData(){
-            if (map.hasLayer(layerGroup)) {
+            /*if (map.hasLayer(layerGroup)) {
                 layerGroup.clearLayers();
-            }
+            }*/
 
             if (document.getElementById('div1S1').checked) {
                 fetchJSONData("S1");
             }
+            else{
+                if (map.hasLayer(layers[0])) {
+                    layers[0].clearLayers();
+                }
+            }
 
             if (document.getElementById('div1S2').checked) {
                 fetchJSONData("S2");
+            }
+            else{
+                if (map.hasLayer(layers[1])) {
+                    layers[1].clearLayers();
+                }
             }
 
             if (document.getElementById('allS3').checked) {
@@ -1167,11 +1094,26 @@
                 if (document.getElementById('div1S3').checked) {
                     fetchJSONData("D1S3");
                 }
+                else{
+                    if (map.hasLayer(layers[2])) {
+                        layers[2].clearLayers();
+                    }
+                }
                 if (document.getElementById('div2S3').checked) {
                     fetchJSONData("D2S3");
                 }
+                else{
+                    if (map.hasLayer(layers[3])) {
+                        layers[3].clearLayers();
+                    }
+                }
                 if (document.getElementById('div3S3').checked) {
                     fetchJSONData("D3S3");
+                }
+                else{
+                    if (map.hasLayer(layers[4])) {
+                        layers[4].clearLayers();
+                    }
                 }
             }
 
@@ -1182,11 +1124,26 @@
                 if (document.getElementById('div1S4').checked) {
                     fetchJSONData("D1S4");
                 }
+                else{
+                    if (map.hasLayer(layers[5])) {
+                        layers[5].clearLayers();
+                    }
+                }
                 if (document.getElementById('div2S4').checked) {
                     fetchJSONData("D2S4");
                 }
+                else{
+                    if (map.hasLayer(layers[6])) {
+                        layers[6].clearLayers();
+                    }
+                }
                 if (document.getElementById('div3S4').checked) {
                     fetchJSONData("D3S4");
+                }
+                else{
+                    if (map.hasLayer(layers[7])) {
+                        layers[7].clearLayers();
+                    }
                 }
             }
 
@@ -1197,11 +1154,26 @@
                 if (document.getElementById('div1S5').checked) {
                     fetchJSONData("D1S5");
                 }
+                else{
+                    if (map.hasLayer(layers[8])) {
+                        layers[8].clearLayers();
+                    }
+                }
                 if (document.getElementById('div2S5').checked) {
                     fetchJSONData("D2S5");
                 }
+                else{
+                    if (map.hasLayer(layers[9])) {
+                        layers[9].clearLayers();
+                    }
+                }
                 if (document.getElementById('div3S5').checked) {
                     fetchJSONData("D3S5");
+                }
+                else{
+                    if (map.hasLayer(layers[10])) {
+                        layers[10].clearLayers();
+                    }
                 }
             }
 
@@ -1212,11 +1184,26 @@
                 if (document.getElementById('div1S6').checked) {
                     fetchJSONData("D1S6");
                 }
+                else{
+                    if (map.hasLayer(layers[11])) {
+                        layers[11].clearLayers();
+                    }
+                }
                 if (document.getElementById('div2S6').checked) {
                     fetchJSONData("D2S6");
                 }
+                else{
+                    if (map.hasLayer(layers[12])) {
+                        layers[12].clearLayers();
+                    }
+                }
                 if (document.getElementById('div3S6').checked) {
                     fetchJSONData("D3S6");
+                }
+                else{
+                    if (map.hasLayer(layers[13])) {
+                        layers[13].clearLayers();
+                    }
                 }
             }
 
@@ -1227,47 +1214,93 @@
                 if (document.getElementById('div1S7').checked) {
                     fetchJSONData("D1S7");
                 }
+                else{
+                    if (map.hasLayer(layers[14])) {
+                        layers[14].clearLayers();
+                    }
+                }
                 if (document.getElementById('div2S7').checked) {
                     fetchJSONData("D2S7");
                 }
+                else{
+                    if (map.hasLayer(layers[15])) {
+                        layers[15].clearLayers();
+                    }
+                }
                 if (document.getElementById('div3S7').checked) {
                     fetchJSONData("D3S7");
+                }
+                else{
+                    if (map.hasLayer(layers[16])) {
+                        layers[16].clearLayers();
+                    }
                 }
             }
 
         }
 
         function fetchDataCactus(){
-            if (map.hasLayer(layerGroup)) {
-                layerGroup.clearLayers();
-            }
-
             if (document.getElementById('cactusS1').checked) {
                 fetchJSONDataCactus("S1");
+            }
+            else{
+                if (map.hasLayer(layersCactus[0])) {
+                    layersCactus[0].clearLayers();
+                }
             }
 
             if (document.getElementById('cactusS2').checked) {
                 fetchJSONDataCactus("S2");
             }
+            else{
+                if (map.hasLayer(layersCactus[1])) {
+                    layersCactus[1].clearLayers();
+                }
+            }
 
             if (document.getElementById('cactusS3').checked) {
                 fetchJSONDataCactus("S3");
+            }
+            else{
+                if (map.hasLayer(layersCactus[2])) {
+                    layersCactus[2].clearLayers();
+                }
             }
 
             if (document.getElementById('cactusS4').checked) {
                 fetchJSONDataCactus("S4");
             }
+            else{
+                if (map.hasLayer(layersCactus[3])) {
+                    layersCactus[3].clearLayers();
+                }
+            }
 
             if (document.getElementById('cactusS5').checked) {
                 fetchJSONDataCactus("S5");
+            }
+            else{
+                if (map.hasLayer(layersCactus[4])) {
+                    layersCactus[4].clearLayers();
+                }
             }
 
             if (document.getElementById('cactusS6').checked) {
                 fetchJSONDataCactus("S6");
             }
+            else{
+                if (map.hasLayer(layersCactus[5])) {
+                    layersCactus[5].clearLayers();
+                }
+            }
 
             if (document.getElementById('cactusS7').checked) {
                 fetchJSONDataCactus("S7");
+            }
+            else{
+                if (map.hasLayer(layersCactus[6])) {
+                    layersCactus[6].clearLayers();
+                }
             }
         }
 
