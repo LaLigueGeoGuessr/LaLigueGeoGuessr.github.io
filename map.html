@@ -962,6 +962,20 @@
         }
 
         function changeCompetition(elem){
+            if (map.hasLayer(layerGroup)) {
+                layerGroup.clearLayers();
+            }
+            for(let i = 0; i < layers.length; i++){
+                if (map.hasLayer(layers[i])) {
+                    layers[i].clearLayers();
+                } 
+            }
+            for(let i = 0; i < layersCactus.length; i++){
+                if (map.hasLayer(layersCactus[i])) {
+                    layersCactus[i].clearLayers();
+                } 
+            }
+            
             var id = elem.id;
 
             if(id === 'ligue'){
