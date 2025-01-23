@@ -1,165 +1,195 @@
 html {
 	scroll-behavior: smooth;
+  scroll-padding-top: 30px;
 }
 
-
-body{
-    font-family: "Lexend Deca";
-    background-color: #f6e5d1;
-    color: #272035;
-    margin: 0px;
+body {
+  font-family: "Lexend Deca";
+  background-color: #f6e5d1;
+  color: #272035;
+  margin: 0px;
 }
 
 @font-face { font-family: "Lexend Deca"; src: url("../resources/LexendDeca-VariableFont_wght.ttf"); }
 
-h1{
-    text-align: center;
-    font-size: 35px;
+header {
+  position: sticky;
+  background-color: #ffd29b;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
 }
 
-.top{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 20px;
+header a {
+  height: 36px;
+  font-size: 30px;
+  color: #272035;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  text-decoration: none;
 }
 
-h2{
-    text-align: center;
-    font-size: 28px;
+header a:hover {
+  background: red;
 }
 
-h3{
-    text-align: center;
-    font-size: 24px;
+main {
+  margin: 0 auto 25px;
+	width: 100%;
+	max-width: 1400px;
 }
 
-.mainTitles {
-    background-color: #ffd29b;
-    position: sticky;
-    top: 0px;
-    overflow: hidden;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
+main nav {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
 }
 
-.mainTitles a {
-    font-size: 30px;
-    color: #272035;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+main nav div {
+  background-color: #ffd29b;
+  border-radius: 0 0 9px 9px;
 }
 
-.mainTitles a:hover {
-    background: red;
+main nav a {
+  height: 18px;
+  font-size: 15px;
+  color: #272035;
+  padding: 6px 9px;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.div{
-    margin-top: 40px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+h1 {
+  text-align: center;
+  font-size: 35px;
 }
 
-.blocTeam{
-    margin-bottom: 25px;
-    background-color: #e8ae6d;
-    width: 400px;
-    border-radius: 5px;
-    padding: 10px;
+h2 {
+  text-align: center;
+  font-size: 28px;
 }
 
-.teamName{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 20px;
-    margin-left: 10px;
+h3 {
+  text-align: center;
+  font-size: 24px;
 }
 
-.teamName img{
-    width: 50px;
-    height: 50px;
+section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  gap: 25px;
 }
 
-.blocTeam ul{
-    list-style-type: none;
+@media (max-width: 1000px) {
+  section {
+    grid-template-columns: auto;
+  }
 }
 
-.blocTeam ul li{
-    padding-bottom: 5px;
+article {
+  background-color: #e8ae6d;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 100%;
 }
 
-.gameModes{
-    margin-top: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+article > img {
+  max-width: 100%;
+  float: left;
 }
 
-.blocMode img{
-    /* 1.929824561 ratio */
-    height: 400px;
-    width: 771px;
+article h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+article p {
+  text-align: justify;
+}
+
+div.contact {
+  grid-column: 1/-1;
+  text-align: center;
+}
+
+div.contact a {
+  border-radius: 18px;
+  padding: 12px 18px;
+  font-size: 36px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}
+
+section.equipes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+section.equipes article {
+  width: 300px;
+}
+
+section.equipes article h2 {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+section.equipes article h2 img {
+  width: 50px;
+  height: 50px;
+}
+
+section.modes article {
+  display: grid;
+  align-content: center;
+  background-color: transparent;
 }
 
 footer {
-    padding: 20px 0 5px;
-    background-color: #ffce97;
-    color: #272035;
-    font-size: 16px;
+  padding: 20px 0 5px;
+  background-color: #ffce97;
+  color: #272035;
+  font-size: 16px;
 }
 
 footer nav {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
 }
 
-footer ul {
-    list-style: none;
-    padding: 0;
+footer nav ul {
+  list-style: none;
+  padding: 0;
 }
 
 footer h4 {
-    margin: 0 0 8px;
+  margin: 0 0 8px;
 }
 
 footer a img {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 footer a {
-    text-decoration: none;
-    color: #272035;
+  text-decoration: none;
+  color: #272035;
 }
 
 footer a:hover {
-    color: #524c5d;
+  color: #524c5d;
 }
 
 footer p {
-    text-align: center;
-}
-
-.networks{
-    display: flex; 
-    justify-content: center;
-    gap: 20px;
-}
-
-.networks p{
-    display: flex;
-    align-items:center;
-}
-
-.networks img{
-    padding-right: 10px;
+  text-align: center;
 }
