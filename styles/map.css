@@ -57,6 +57,26 @@
     margin: 5px 0px 5px 2px;
 }
 
+#td_d1{
+    font-weight: bold;
+    color: rgb(9, 172, 9);
+}
+
+#td_d2{
+    font-weight: bold;
+    color: rgb(195, 0, 0);
+}
+
+#td_d3{
+    font-weight: bold;
+    color: rgb(10, 17, 235);
+}
+
+#td_d4{
+    font-weight: bold;
+    color: rgb(207, 156, 0);
+}
+
 #filtresCactus p{
     font-weight: bold;
     margin: 5px 0px 5px 2px;

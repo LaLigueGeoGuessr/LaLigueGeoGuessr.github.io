@@ -41,9 +41,10 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td>D1</td>
-                <td>D2</td>
-                <td>D3</td>
+                <td id="td_d1">D1</td>
+                <td id="td_d2">D2</td>
+                <td id="td_d3">D3</td>
+                <td id="td_d4">D4</td>
             </tr>
             <tr>
                 <td></td>
@@ -51,6 +52,7 @@
                 <td><input type="checkbox" id="div1All" name="div1All" onclick="checkBoxAllDiv(this)"/></td>
                 <td><input type="checkbox" id="div2All" name="div2All" onclick="checkBoxAllDiv(this)"/></td>
                 <td><input type="checkbox" id="div3All" name="div3All" onclick="checkBoxAllDiv(this)"/></td>
+                <td><input type="checkbox" id="div4All" name="div4All" onclick="checkBoxAllDiv(this)"/></td>
             </tr>
             <tr>
                 <td>S1</td>
@@ -100,6 +102,14 @@
                 <td><input type="checkbox" id="div1S7" name="div1S7" onclick="checkBoxSingle(this)"/></td>
                 <td><input type="checkbox" id="div2S7" name="div2S7" onclick="checkBoxSingle(this)"/></td>
                 <td><input type="checkbox" id="div3S7" name="div3S7" onclick="checkBoxSingle(this)"/></td>
+            </tr>
+            <tr>
+                <td>S8</td>
+                <td><input type="checkbox" id="allS8" name="allS8" onclick="checkBoxAllSeason(this)"/></td>
+                <td><input type="checkbox" id="div1S8" name="div1S8" onclick="checkBoxSingle(this)"/></td>
+                <td><input type="checkbox" id="div2S8" name="div2S8" onclick="checkBoxSingle(this)"/></td>
+                <td><input type="checkbox" id="div3S8" name="div3S8" onclick="checkBoxSingle(this)"/></td>
+                <td><input type="checkbox" id="div4S8" name="div4S8" onclick="checkBoxSingle(this)"/></td>
             </tr>
         </table>
     </div>
@@ -171,6 +181,14 @@
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
         });
+        var orangeIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
 
         var map = L.map('map').setView([0, 0], 2);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -179,7 +197,7 @@
         }).addTo(map);
         
         var cluster = false;
-        var layers = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
+        var layers = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
         var layersCactus = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
         var layerGroup = L.markerClusterGroup();
 
@@ -478,6 +496,75 @@
                                 }
                             }
                             map.addLayer(layers[16]);  
+                        }
+
+                        else if(filter === "S8"){
+                            if(data[i][1].includes('S8')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layers[17].addLayer(marker);
+                                    }
+                                }
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layers[18].addLayer(marker);
+                                    }
+                                }
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layers[19].addLayer(marker);
+                                    }
+                                }
+                                else if(data[i][1].includes('L4') || data[i][1].includes('D4')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: orangeIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layers[20].addLayer(marker);
+                                    }
+                                }
+                            }  
+                            map.addLayer(layers[17]);
+                            map.addLayer(layers[18]);
+                            map.addLayer(layers[19]);
+                            map.addLayer(layers[20]);
+                        }
+                        else if(filter === "D1S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layers[17].addLayer(marker);
+                                }
+                            }  
+                            map.addLayer(layers[17]);
+                        }
+                        else if(filter === "D2S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layers[18].addLayer(marker);
+                                }
+                            }
+                            map.addLayer(layers[18]);  
+                        }
+                        else if(filter === "D3S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layers[19].addLayer(marker);
+                                }
+                            }
+                            map.addLayer(layers[19]);  
+                        }
+                        else if(filter === "D4S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L4') || data[i][1].includes('D4'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layers[20].addLayer(marker);
+                                }
+                            }
+                            map.addLayer(layers[20]);  
                         }
                     }
                     //map.addLayer(layerGroup);
@@ -835,6 +922,67 @@
                                 }
                             }  
                         }
+
+                        else if(filter === "S8"){
+                            if(data[i][1].includes('S8')){
+                                if(data[i][1].includes('L1') || data[i][1].includes('D1')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
+                                }
+                                else if(data[i][1].includes('L2') || data[i][1].includes('D2')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
+                                }
+                                else if(data[i][1].includes('L3') || data[i][1].includes('D3')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
+                                }
+                                else if(data[i][1].includes('L4') || data[i][1].includes('D4')){
+                                    for(let j = 0; j < 5; j++){
+                                        var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: orangeIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                        layerGroup.addLayer(marker);
+                                    }
+                                }
+                            }  
+                        }
+                        else if(filter === "D1S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L1') || data[i][1].includes('D1'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+                        else if(filter === "D2S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L2') || data[i][1].includes('D2'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: redIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+                        else if(filter === "D3S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L3') || data[i][1].includes('D3'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
+                        else if(filter === "D4S8"){
+                            if(data[i][1].includes('S8') && (data[i][1].includes('L4') || data[i][1].includes('D4'))){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
                     }
                     map.addLayer(layerGroup);
                 })   
@@ -1016,6 +1164,7 @@
                     document.getElementById('div1S5').checked = true;
                     document.getElementById('div1S6').checked = true;
                     document.getElementById('div1S7').checked = true;
+                    document.getElementById('div1S8').checked = true;
                 }
                 else if (!elem.checked) {
                     document.getElementById('div1S1').checked = false;
@@ -1027,9 +1176,9 @@
                     document.getElementById('div1S5').checked = false;
                     document.getElementById('div1S6').checked = false;
                     document.getElementById('div1S7').checked = false;
+                    document.getElementById('div1S8').checked = false;
                 }
             }
-            
             if(id === 'div2All'){
                 if (elem.checked) {
                     document.getElementById('div2S3').checked = true;
@@ -1037,6 +1186,7 @@
                     document.getElementById('div2S5').checked = true;
                     document.getElementById('div2S6').checked = true;
                     document.getElementById('div2S7').checked = true;
+                    document.getElementById('div2S8').checked = true;
                 }
                 else if (!elem.checked) {
                     document.getElementById('div2S3').checked = false;
@@ -1044,6 +1194,7 @@
                     document.getElementById('div2S5').checked = false;
                     document.getElementById('div2S6').checked = false;
                     document.getElementById('div2S7').checked = false;
+                    document.getElementById('div2S8').checked = false;
                 }
             }
             if(id === 'div3All'){
@@ -1053,6 +1204,7 @@
                     document.getElementById('div3S5').checked = true;
                     document.getElementById('div3S6').checked = true;
                     document.getElementById('div3S7').checked = true;
+                    document.getElementById('div3S8').checked = true;
                 }
                 else if (!elem.checked) {
                     document.getElementById('div3S3').checked = false;
@@ -1060,6 +1212,15 @@
                     document.getElementById('div3S5').checked = false;
                     document.getElementById('div3S6').checked = false;
                     document.getElementById('div3S7').checked = false;
+                    document.getElementById('div3S8').checked = false;
+                }
+            }
+            if(id === 'div4All'){
+                if (elem.checked) {
+                    document.getElementById('div4S8').checked = true;
+                }
+                else if (!elem.checked) {
+                    document.getElementById('div4S8').checked = false;
                 }
             }
             if(document.getElementById('div1S3').checked && document.getElementById('div2S3').checked && document.getElementById('div3S3').checked){
@@ -1077,6 +1238,9 @@
             if(document.getElementById('div1S7').checked && document.getElementById('div2S7').checked && document.getElementById('div3S7').checked){
                 document.getElementById('allS7').checked = true;
             }
+            if(document.getElementById('div1S8').checked && document.getElementById('div2S8').checked && document.getElementById('div3S8').checked && document.getElementById('div4S8').checked){
+                document.getElementById('allS8').checked = true;
+            }
 
             if(!document.getElementById('div1S3').checked || !document.getElementById('div2S3').checked || !document.getElementById('div3S3').checked){
                 document.getElementById('allS3').checked = false;
@@ -1092,6 +1256,9 @@
             }
             if(!document.getElementById('div1S7').checked || !document.getElementById('div2S7').checked || !document.getElementById('div3S7').checked){
                 document.getElementById('allS7').checked = false;
+            }
+            if(!document.getElementById('div1S8').checked || !document.getElementById('div2S8').checked || !document.getElementById('div3S8').checked || !document.getElementById('div4S8').checked){
+                document.getElementById('allS8').checked = false;
             }
 
             if(!cluster){
@@ -1189,24 +1356,45 @@
                 }
             }
 
-            if(document.getElementById('div1S1').checked && document.getElementById('div1S2').checked && document.getElementById('div1S3').checked && document.getElementById('div1S4').checked && document.getElementById('div1S5').checked && document.getElementById('div1S6').checked && document.getElementById('div1S7').checked){
-                document.getElementById('div1All').checked = true;
-            }
-            if(document.getElementById('div2S3').checked && document.getElementById('div2S4').checked && document.getElementById('div2S5').checked && document.getElementById('div2S6').checked && document.getElementById('div2S7').checked){
-                document.getElementById('div2All').checked = true;
-            }
-            if(document.getElementById('div3S3').checked && document.getElementById('div3S4').checked && document.getElementById('div3S5').checked && document.getElementById('div3S6').checked && document.getElementById('div3S7').checked){
-                document.getElementById('div3All').checked = true;
+            if(id === 'allS8'){
+                if (elem.checked) {
+                    document.getElementById('div1S8').checked = true;
+                    document.getElementById('div2S8').checked = true;
+                    document.getElementById('div3S8').checked = true;
+                    document.getElementById('div4S8').checked = true;
+                }
+                else if (!elem.checked) {
+                    document.getElementById('div1S8').checked = false;
+                    document.getElementById('div2S8').checked = false;
+                    document.getElementById('div3S8').checked = false;
+                    document.getElementById('div4S8').checked = false;
+                }
             }
 
-            if(!document.getElementById('div1S1').checked || !document.getElementById('div1S2').checked || !document.getElementById('div1S3').checked || !document.getElementById('div1S4').checked || !document.getElementById('div1S5').checked || !document.getElementById('div1S6').checked || !document.getElementById('div1S7').checked){
+            if(document.getElementById('div1S1').checked && document.getElementById('div1S2').checked && document.getElementById('div1S3').checked && document.getElementById('div1S4').checked && document.getElementById('div1S5').checked && document.getElementById('div1S6').checked && document.getElementById('div1S7').checked && document.getElementById('div1S8').checked){
+                document.getElementById('div1All').checked = true;
+            }
+            if(document.getElementById('div2S3').checked && document.getElementById('div2S4').checked && document.getElementById('div2S5').checked && document.getElementById('div2S6').checked && document.getElementById('div2S7').checked && document.getElementById('div2S8').checked){
+                document.getElementById('div2All').checked = true;
+            }
+            if(document.getElementById('div3S3').checked && document.getElementById('div3S4').checked && document.getElementById('div3S5').checked && document.getElementById('div3S6').checked && document.getElementById('div3S7').checked && document.getElementById('div3S8').checked){
+                document.getElementById('div3All').checked = true;
+            }
+            if(document.getElementById('div4S8').checked){
+                document.getElementById('div4All').checked = true;
+            }
+
+            if(!document.getElementById('div1S1').checked || !document.getElementById('div1S2').checked || !document.getElementById('div1S3').checked || !document.getElementById('div1S4').checked || !document.getElementById('div1S5').checked || !document.getElementById('div1S6').checked || !document.getElementById('div1S7').checked || !document.getElementById('div1S8').checked){
                 document.getElementById('div1All').checked = false;
             }
-            if(!document.getElementById('div2S3').checked || !document.getElementById('div2S4').checked || !document.getElementById('div2S5').checked || !document.getElementById('div2S6').checked || !document.getElementById('div2S7').checked){
+            if(!document.getElementById('div2S3').checked || !document.getElementById('div2S4').checked || !document.getElementById('div2S5').checked || !document.getElementById('div2S6').checked || !document.getElementById('div2S7').checked || !document.getElementById('div2S8').checked){
                 document.getElementById('div2All').checked = false;
             }
-            if(!document.getElementById('div3S3').checked || !document.getElementById('div3S4').checked || !document.getElementById('div3S5').checked || !document.getElementById('div3S6').checked || !document.getElementById('div3S7').checked){
+            if(!document.getElementById('div3S3').checked || !document.getElementById('div3S4').checked || !document.getElementById('div3S5').checked || !document.getElementById('div3S6').checked || !document.getElementById('div3S7').checked || !document.getElementById('div3S8').checked){
                 document.getElementById('div3All').checked = false;
+            }
+            if(!document.getElementById('div4S8').checked){
+                document.getElementById('div4All').checked = false;
             }
 
             if(!cluster){
@@ -1422,14 +1610,65 @@
                 }
             }
 
-            if(document.getElementById('div1S1').checked && document.getElementById('div1S2').checked && document.getElementById('div1S3').checked && document.getElementById('div1S4').checked && document.getElementById('div1S5').checked && document.getElementById('div1S6').checked && document.getElementById('div1S7').checked){
+            if(id === 'div1S8'){
+                if (!elem.checked && document.getElementById('allS8').checked) {
+                    document.getElementById('allS8').checked = false;
+                }
+                if (!elem.checked && document.getElementById('div1All').checked) {
+                    document.getElementById('div1All').checked = false;
+                }
+                if(elem.checked && document.getElementById('div2S8').checked && document.getElementById('div3S8').checked && document.getElementById('div4S8').checked){
+                    document.getElementById('allS8').checked = true;
+                }
+            }
+
+            if(id === 'div2S8'){
+                if (!elem.checked && document.getElementById('allS8').checked) {
+                    document.getElementById('allS8').checked = false;
+                }
+                if (!elem.checked && document.getElementById('div2All').checked) {
+                    document.getElementById('div2All').checked = false;
+                }
+                if(elem.checked && document.getElementById('div1S8').checked && document.getElementById('div3S8').checked && document.getElementById('div4S8').checked){
+                    document.getElementById('allS8').checked = true;
+                }
+            }
+
+            if(id === 'div3S8'){
+                if (!elem.checked && document.getElementById('allS8').checked) {
+                    document.getElementById('allS8').checked = false;
+                }
+                if (!elem.checked && document.getElementById('div3All').checked) {
+                    document.getElementById('div3All').checked = false;
+                }
+                if(elem.checked && document.getElementById('div2S8').checked && document.getElementById('div1S8').checked && document.getElementById('div4S8').checked){
+                    document.getElementById('allS8').checked = true;
+                }
+            }
+
+            if(id === 'div4S8'){
+                if (!elem.checked && document.getElementById('allS8').checked) {
+                    document.getElementById('allS8').checked = false;
+                }
+                if (!elem.checked && document.getElementById('div4All').checked) {
+                    document.getElementById('div4All').checked = false;
+                }
+                if(elem.checked && document.getElementById('div1S8').checked && document.getElementById('div2S8').checked && document.getElementById('div3S8').checked){
+                    document.getElementById('allS8').checked = true;
+                }
+            }
+
+            if(document.getElementById('div1S1').checked && document.getElementById('div1S2').checked && document.getElementById('div1S3').checked && document.getElementById('div1S4').checked && document.getElementById('div1S5').checked && document.getElementById('div1S6').checked && document.getElementById('div1S7').checked && document.getElementById('div1S8').checked){
                 document.getElementById('div1All').checked = true;
             }
-            if(document.getElementById('div2S3').checked && document.getElementById('div2S4').checked && document.getElementById('div2S5').checked && document.getElementById('div2S6').checked && document.getElementById('div2S7').checked){
+            if(document.getElementById('div2S3').checked && document.getElementById('div2S4').checked && document.getElementById('div2S5').checked && document.getElementById('div2S6').checked && document.getElementById('div2S7').checked && document.getElementById('div2S8').checked){
                 document.getElementById('div2All').checked = true;
             }
-            if(document.getElementById('div3S3').checked && document.getElementById('div3S4').checked && document.getElementById('div3S5').checked && document.getElementById('div3S6').checked && document.getElementById('div3S7').checked){
+            if(document.getElementById('div3S3').checked && document.getElementById('div3S4').checked && document.getElementById('div3S5').checked && document.getElementById('div3S6').checked && document.getElementById('div3S7').checked && document.getElementById('div3S8').checked){
                 document.getElementById('div3All').checked = true;
+            }
+            if(document.getElementById('div4S8').checked){
+                document.getElementById('div4All').checked = true;
             }
 
             if(!cluster){
@@ -1694,6 +1933,52 @@
                 }
             }
 
+            if (document.getElementById('allS8').checked) {
+                fetchJSONData("S8");
+            }
+            else {
+                if (document.getElementById('div1S8').checked) {
+                    if (layers[17].getLayers().length == 0) {
+                        fetchJSONData("D1S8");
+                    }
+                }
+                else{
+                    if (map.hasLayer(layers[17])) {
+                        layers[17].clearLayers();
+                    }
+                }
+                if (document.getElementById('div2S8').checked) {
+                    if (layers[18].getLayers().length == 0) {
+                        fetchJSONData("D2S8");
+                    }
+                }
+                else{
+                    if (map.hasLayer(layers[18])) {
+                        layers[18].clearLayers();
+                    }
+                }
+                if (document.getElementById('div3S8').checked) {
+                    if (layers[19].getLayers().length == 0) {
+                        fetchJSONData("D3S8");
+                    }
+                }
+                else{
+                    if (map.hasLayer(layers[19])) {
+                        layers[19].clearLayers();
+                    }
+                }
+                if (document.getElementById('div4S8').checked) {
+                    if (layers[20].getLayers().length == 0) {
+                        fetchJSONData("D4S8");
+                    }
+                }
+                else{
+                    if (map.hasLayer(layers[20])) {
+                        layers[20].clearLayers();
+                    }
+                }
+            }
+
         }
 
         function fetchDataCactus(){
@@ -1860,6 +2145,24 @@
                 }
                 if (document.getElementById('div3S7').checked) {
                     fetchJSONDataCluster("D3S7");
+                }
+            }
+
+            if (document.getElementById('allS8').checked) {
+                fetchJSONDataCluster("S8");
+            }
+            else {
+                if (document.getElementById('div1S8').checked) {
+                    fetchJSONDataCluster("D1S8");
+                }
+                if (document.getElementById('div2S8').checked) {
+                    fetchJSONDataCluster("D2S8");
+                }
+                if (document.getElementById('div3S8').checked) {
+                    fetchJSONDataCluster("D3S8");
+                }
+                if (document.getElementById('div4S8').checked) {
+                    fetchJSONDataCluster("D4S8");
                 }
             }
 
