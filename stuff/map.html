@@ -149,6 +149,10 @@
                 <td>S7</td>
                 <td><input type="checkbox" id="cactusS7" name="cactusS7" onclick="checkBoxAllSeasonCactus(this)"/></td>
             </tr>
+            <tr>
+                <td>S8</td>
+                <td><input type="checkbox" id="cactusS8" name="cactusS8" onclick="checkBoxAllSeasonCactus(this)"/></td>
+            </tr>
         </table>
     </div>
 
@@ -198,7 +202,7 @@
         
         var cluster = false;
         var layers = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
-        var layersCactus = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
+        var layersCactus = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
         var layerGroup = L.markerClusterGroup();
 
 
@@ -653,6 +657,16 @@
                             }  
                             map.addLayer(layersCactus[6]);
                         }
+
+                        else if(filter === "S8"){
+                            if(data[i][1].includes('S8')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layersCactus[6].addLayer(marker);
+                                }
+                            }  
+                            map.addLayer(layersCactus[7]);
+                        }
                     }
                 })   
                 .catch((error) =>
@@ -1063,6 +1077,15 @@
                                 }
                             }  
                         }
+
+                        else if(filter === "S8"){
+                            if(data[i][1].includes('S8')){
+                                for(let j = 0; j < 5; j++){
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    layerGroup.addLayer(marker);
+                                }
+                            }  
+                        }
                     }
                     map.addLayer(layerGroup);
                 })   
@@ -1088,8 +1111,8 @@
 
             if(document.getElementById('marker').checked){
                 cluster = false;
-                layers = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
-                layersCactus = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
+                layers = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
+                layersCactus = [L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup(), L.layerGroup()];
                 if(document.getElementById('ligue').checked){
                     fetchData();
                 }
@@ -1690,6 +1713,7 @@
                 document.getElementById('cactusS5').checked = true;
                 document.getElementById('cactusS6').checked = true;
                 document.getElementById('cactusS7').checked = true;
+                document.getElementById('cactusS8').checked = true;
             }
             else if (!elem.checked) {
                 document.getElementById('cactusS1').checked = false;
@@ -1699,6 +1723,7 @@
                 document.getElementById('cactusS5').checked = false;
                 document.getElementById('cactusS6').checked = false;
                 document.getElementById('cactusS7').checked = false;
+                document.getElementById('cactusS8').checked = false;
             }
 
             if(!cluster){
@@ -2058,6 +2083,16 @@
                     layersCactus[6].clearLayers();
                 }
             }
+            if (document.getElementById('cactusS8').checked) {
+                if (layersCactus[7].getLayers().length == 0) {
+                    fetchJSONDataCactus("S8");
+                }
+            }
+            else{
+                if (map.hasLayer(layersCactus[7])) {
+                    layersCactus[7].clearLayers();
+                }
+            }
         }
 
         function fetchDataCluster(){
@@ -2199,6 +2234,10 @@
 
             if (document.getElementById('cactusS7').checked) {
                 fetchJSONDataCactusCluster("S7");
+            }
+
+            if (document.getElementById('cactusS8').checked) {
+                fetchJSONDataCactusCluster("S8");
             }
         }
 

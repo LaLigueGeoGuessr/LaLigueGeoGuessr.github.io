@@ -80,6 +80,11 @@ h3 {
   font-size: 24px;
 }
 
+h4 {
+  text-align: center;
+  font-size: 20px;
+}
+
 section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -100,15 +105,25 @@ article {
   max-width: 100%;
 }
 
+
 article > img {
   max-width: 100%;
   float: left;
+}
+
+article > .place {
+  width: 40px;
+  height: 40px;
+  float: none;
+  display: block;
+  margin: 0px auto;
 }
 
 article h2 {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 5px;
 }
 
 article p {
@@ -153,6 +168,21 @@ section.modes article {
   display: grid;
   align-content: center;
   background-color: transparent;
+}
+
+
+.cactusWinners p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.cactusWinners img {
+  max-width: 100%;
+  float: left;
+  width: 30px;
+  height: 30px;
 }
 
 footer {
