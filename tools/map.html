@@ -564,7 +564,7 @@
                         else if(filter === "D4S8"){
                             if(data[i][1].includes('S8') && (data[i][1].includes('L4') || data[i][1].includes('D4'))){
                                 for(let j = 0; j < 5; j++){
-                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: orangeIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
                                     layers[20].addLayer(marker);
                                 }
                             }
@@ -992,7 +992,7 @@
                         else if(filter === "D4S8"){
                             if(data[i][1].includes('S8') && (data[i][1].includes('L4') || data[i][1].includes('D4'))){
                                 for(let j = 0; j < 5; j++){
-                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng]).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
+                                    var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: orangeIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
                                     layerGroup.addLayer(marker);
                                 }
                             }  
