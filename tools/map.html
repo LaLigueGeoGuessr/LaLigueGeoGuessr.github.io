@@ -649,8 +649,8 @@
                         }
 
                         else if(filter === "S7"){
+                            console.log(data[i][1]);
                             if(data[i][1].includes('S7')){
-                                console.log(data[i][0]);
                                 for(let j = 0; j < 5; j++){
                                     var marker = L.marker([data[i][2+j].lat, data[i][2+j].lng], {icon: greenIcon}).bindPopup(data[i][1] + '<br><br><a href="' + getGoogleLink(data[i][2+j].lat, data[i][2+j].lng, data[i][2+j].panoId, data[i][2+j].heading, data[i][2+j].pitch, data[i][2+j].zoom) + '" target="_blank">Ouvrir le point</a><br><br><a href="https://www.geoguessr.com/challenge/' + data[i][0] + '" target="_blank">Challenge</a>');
                                     layersCactus[6].addLayer(marker);
