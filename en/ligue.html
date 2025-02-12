@@ -12,7 +12,7 @@
 
 <script>
     function readCSVs(){
-        const responseD1 = fetch('../resources/S8_D1_teams.csv')
+        const responseD1 = fetch('../resources/S8/S8_D1_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -35,7 +35,7 @@
                     </article>`
             }
         })
-        const responseD2 = fetch('../resources/S8_D2_teams.csv')
+        const responseD2 = fetch('../resources/S8/S8_D2_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -58,7 +58,7 @@
                     </article>`
             }
         })
-        const responseD3 = fetch('../resources/S8_D3_teams.csv')
+        const responseD3 = fetch('../resources/S8/S8_D3_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -81,7 +81,7 @@
                     </article>`
             }
         })
-        const responseD4 = fetch('../resources/S8_D4_teams.csv')
+        const responseD4 = fetch('../resources/S8/S8_D4_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -122,79 +122,84 @@
 
 <body>
     <header>
-      <a href="../en/index.html" id="accueil"><img src="../resources/logo.png" width="24" height="24"><span>La Ligue</span></a>
-      <a href="../fr/ligue.html" id="language"><span>Français</span><img src="../resources/France_flag.png" width="24" height="24"></a>
+      <a href="../en/index.html" id="accueil"><img src="../resources/icons/logo.png" width="24" height="24"><span>La Ligue</span></a>
+      <a href="../fr/ligue.html" id="language"><span>Français</span><img src="../resources/icons/France_flag.png" width="24" height="24"></a>
     </header>
 
     <main>
         <nav>
             <div>
-                <a href="#">Teams</a>
                 <a href="#regularSeason">Regular Season</a>
                 <a href="#playoffs">Playoffs</a>
+                <a href="#teams">Teams</a>
                 <a href="#modes">Game modes</a>
             </div>
         </nav>
 
         <h1>Season 8</h1>
-    
-        <h2>Division 1</h2>
+
+        <h2 id="regularSeason">Regular Season</h2>
+        <section class="modes">
+            <article>
+                <img src="../resources/S8/D1_regularseason.png">
+            </article>
+            <article>
+                <img src="../resources/S8/D2_regularseason.png">
+            </article>
+            <article>
+                <img src="../resources/S8/D3_regularseason.png">
+            </article>
+            <article>
+                <img src="../resources/S8/D4_regularseason.png">
+            </article>
+        </section>
+
+
+        <h2 id="playoffs">Playoffs</h2>
+        <section class="modes">
+            <article>
+                <img src="../resources/S8/D1_playoffs.png">
+            </article>
+            <article>
+                <img src="../resources/S8/D2_playoffs.png">
+            </article>
+            <article>
+                <img src="../resources/S8/D3_playoffs.png">
+            </article>
+            <article>
+                <img src="../resources/S8/D4_playoffs.png">
+            </article>
+        </section>
+
+
+        <h2 id="teams">Teams</h2>
+
+        <h3>Division 1</h3>
     
         <section class="equipes" id="d1">
             
         </section>
     
-        <h2>Division 2</h2>
+        <h3>Division 2</h3>
     
         <section class="equipes" id="d2">
             
         </section>
     
-        <h2>Division 3</h2>
+        <h3>Division 3</h3>
     
         <section class="equipes" id="d3">
             
         </section>
         
-        <h2>Division 4</h2>
-    
+        <h3>Division 4</h3>
+
         <section class="equipes" id="d4">
             
         </section>
 
-        <h1 id="regularSeason">Regular Season</h1>
-        <section class="modes">
-            <article>
-                <img src="../resources/D1_regularseason.png">
-            </article>
-            <article>
-                <img src="../resources/D2_regularseason.png">
-            </article>
-            <article>
-                <img src="../resources/D3_regularseason.png">
-            </article>
-            <article>
-                <img src="../resources/D4_regularseason.png">
-            </article>
-        </section>
-
-        <h1 id="playoffs">Playoffs</h1>
-        <section class="modes">
-            <article>
-                <img src="../resources/D1_playoffs.png">
-            </article>
-            <article>
-                <img src="../resources/D2_playoffs.png">
-            </article>
-            <article>
-                <img src="../resources/D3_playoffs.png">
-            </article>
-            <article>
-                <img src="../resources/D4_playoffs.png">
-            </article>
-        </section>
     
-        <h1 id="modes">Game modes</h1>
+        <h2 id="modes">Game modes</h2>
         <section class="modes">
             <article>
                 <img src="../resources/modes/triforce.png">
@@ -208,7 +213,6 @@
             <article>
                 <img src="../resources/modes/skytourelle.png">
             </article>
-    
         </section>
     </main>
 
@@ -216,12 +220,12 @@
         <nav>
           <ul>
             <li><h4>Networks</h4></li>
-            <li><a href="https://www.helloasso.com/associations/la-ligue-de-loisir-geographique"><img src="../resources/helloasso-96x96.png" width="16" height="16"><span>HelloAsso</span></a></li>
-            <li><a href="https://discord.gg/693HbPE3rb"><img src="../resources/discord.png" width="16" height="16"><span>Discord</span></a></li>
-            <li><a href="https://www.twitch.tv/laliguegeoguessr"><img src="../resources/twitch-32x32.png" width="16" height="16"><span>Twitch</span></a></li>
-            <li><a href="https://twitter.com/LigueGeoguessr"><img src="../resources/twitter.png" width="16" height="16"><span>Twitter</span></a></li>
-            <li><a href="https://www.instagram.com/liguegeoguessr/"><img src="../resources/instagram.png" width="16" height="16"><span>Instagram</span></a></li>
-            <li><a href="https://bsky.app/profile/laliguegeoguessr.bsky.social"><img src="../resources/bluesky.png" width="16" height="16"><span>Bluesky</span></a></li>
+            <li><a href="https://www.helloasso.com/associations/la-ligue-de-loisir-geographique"><img src="../resources/icons/helloasso-96x96.png" width="16" height="16"><span>HelloAsso</span></a></li>
+            <li><a href="https://discord.gg/693HbPE3rb"><img src="../resources/icons/discord.png" width="16" height="16"><span>Discord</span></a></li>
+            <li><a href="https://www.twitch.tv/laliguegeoguessr"><img src="../resources/icons/twitch-32x32.png" width="16" height="16"><span>Twitch</span></a></li>
+            <li><a href="https://twitter.com/LigueGeoguessr"><img src="../resources/icons/twitter.png" width="16" height="16"><span>Twitter</span></a></li>
+            <li><a href="https://www.instagram.com/liguegeoguessr/"><img src="../resources/icons/instagram.png" width="16" height="16"><span>Instagram</span></a></li>
+            <li><a href="https://bsky.app/profile/laliguegeoguessr.bsky.social"><img src="../resources/icons/bluesky.png" width="16" height="16"><span>Bluesky</span></a></li>
           </ul>
           <ul>
             <li><h4>La Ligue</h4></li>
@@ -229,16 +233,16 @@
             <li><a href="../en/ligue.html"><span>Current season</span></a></li>
             <li><a href="../en/palmares.html"><span>Prize list</span></a></li>
             <li><a href=""><span>Game modes</span></a></li>
-            <li><a href="../stuff/map.html"><span>Map</span></a></li>
           </ul>
           <ul>
             <li><h4>Resources</h4></li>
+            <li><a href="../tools/map.html"><span>Map</span></a></li>
             <li><a href=""><span>Graphic assets</span></a></li>
             <li><a href=""><span>Overlays</span></a></li>
           </ul>
         </nav>
         <p>Copyright © 2025 La Ligue de Loisir Géographique. All rights reserved.</p>
-      </footer>
+    </footer>
 </body>
 
 </html>

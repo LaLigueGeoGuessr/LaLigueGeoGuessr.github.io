@@ -9,7 +9,7 @@ body{
     margin: 0px;
 }
 
-@font-face { font-family: "Lexend Deca"; src: url("../resources/LexendDeca-VariableFont_wght.ttf"); }
+@font-face { font-family: "Lexend Deca"; src: url("../resources/fonts/LexendDeca-VariableFont_wght.ttf"); }
 
 header {
     position: sticky;

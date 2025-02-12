@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="Présentation de la saison actuelle de La Ligue, la compétition principale de La Ligue GeoGuessr.">
-  <title>La Ligue Saison 8</title>
+  <title>La Ligue Saison 9</title>
   <link rel="stylesheet" href="../styles/styleLigue.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
 </head>
 
 <script>
     function readCSVs(){
-        const responseD1 = fetch('../resources/S8/S8_D1_teams.csv')
+        const responseD1 = fetch('../resources/S9_D1_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -35,7 +35,7 @@
                     </article>`
             }
         })
-        const responseD2 = fetch('../resources/S8/S8_D2_teams.csv')
+        const responseD2 = fetch('../resources/S9_D2_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -58,7 +58,7 @@
                     </article>`
             }
         })
-        const responseD3 = fetch('../resources/S8/S8_D3_teams.csv')
+        const responseD3 = fetch('../resources/S9_D3_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -81,7 +81,7 @@
                     </article>`
             }
         })
-        const responseD4 = fetch('../resources/S8/S8_D4_teams.csv')
+        const responseD4 = fetch('../resources/S9_D4_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -123,55 +123,54 @@
 <body>
     <header>
       <a href="../fr/index.html" id="accueil"><img src="../resources/icons/logo.png" width="24" height="24"><span>La Ligue</span></a>
-      <a href="../en/ligue.html" id="language"><span>English</span><img src="../resources/icons/United-kingdom_flag_icon_round.svg.png" width="24" height="24"></a>
+      <a href="../en/s9.html" id="language"><span>English</span><img src="../resources/icons/United-kingdom_flag_icon_round.svg.png" width="24" height="24"></a>
     </header>
 
     <main>
         <nav>
             <div>
                 <a href="#regularSeason">Saison Régulière</a>
-                <a href="#playoffs">Playoffs</a>
+                <!--<a href="#playoffs">Playoffs</a>-->
                 <a href="#teams">Équipes</a>
-                <a href="#modes">Modes de jeu</a>
             </div>
         </nav>
 
-        <h1>Saison 8</h1>
-    
+        <h1>Saison 9</h1>
+
         <h2 id="regularSeason">Saison régulière</h2>
         <section class="modes">
             <article>
-                <img src="../resources/S8/D1_regularseason.png">
+                <img src="../resources/D1_regularseason.png">
             </article>
             <article>
-                <img src="../resources/S8/D2_regularseason.png">
+                <img src="../resources/D2_regularseason.png">
             </article>
             <article>
-                <img src="../resources/S8/D3_regularseason.png">
+                <img src="../resources/D3_regularseason.png">
             </article>
             <article>
-                <img src="../resources/S8/D4_regularseason.png">
+                <img src="../resources/D4_regularseason.png">
             </article>
         </section>
 
-        <h2 id="playoffs">Playoffs</h2>
+        <!--<h2 id="playoffs">Playoffs</h2>
         <section class="modes">
             <article>
-                <img src="../resources/S8/D1_playoffs.png">
+                <img src="../resources/D1_playoffs.png">
             </article>
             <article>
-                <img src="../resources/S8/D2_playoffs.png">
+                <img src="../resources/D2_playoffs.png">
             </article>
             <article>
-                <img src="../resources/S8/D3_playoffs.png">
+                <img src="../resources/D3_playoffs.png">
             </article>
             <article>
-                <img src="../resources/S8/D4_playoffs.png">
+                <img src="../resources/D4_playoffs.png">
             </article>
-        </section>
+        </section>-->
 
         <h2 id="teams">Équipes</h2>
-
+    
         <h3>Division 1</h3>
     
         <section class="equipes" id="d1">
@@ -194,22 +193,6 @@
     
         <section class="equipes" id="d4">
             
-        </section>
-    
-        <h2 id="modes">Modes de jeu</h2>
-        <section class="modes">
-            <article>
-                <img src="../resources/modes/triforce.png">
-            </article>
-            <article>
-                <img src="../resources/modes/equilibre.png">
-            </article>
-            <article>
-                <img src="../resources/modes/cs.png">
-            </article>
-            <article>
-                <img src="../resources/modes/skytourelle.png">
-            </article>
         </section>
     </main>
 

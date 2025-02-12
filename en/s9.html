@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <meta name="description" content="Présentation de la saison actuelle de La Ligue, la compétition principale de La Ligue GeoGuessr.">
-  <title>La Ligue Saison 8</title>
+  <meta name="description" content="Presentation of the current season of La Ligue, the main competition of La Ligue GeoGuessr.">
+  <title>La Ligue Season 9</title>
   <link rel="stylesheet" href="../styles/styleLigue.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
 </head>
 
 <script>
     function readCSVs(){
-        const responseD1 = fetch('../resources/S8/S8_D1_teams.csv')
+        const responseD1 = fetch('../resources/S9_D1_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -35,7 +35,7 @@
                     </article>`
             }
         })
-        const responseD2 = fetch('../resources/S8/S8_D2_teams.csv')
+        const responseD2 = fetch('../resources/S9_D2_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -58,7 +58,7 @@
                     </article>`
             }
         })
-        const responseD3 = fetch('../resources/S8/S8_D3_teams.csv')
+        const responseD3 = fetch('../resources/S9_D3_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -81,7 +81,7 @@
                     </article>`
             }
         })
-        const responseD4 = fetch('../resources/S8/S8_D4_teams.csv')
+        const responseD4 = fetch('../resources/S9_D4_teams.csv')
             .then(response => response.text())
             .then(v => Papa.parse(v))
             .catch(err => console.log(err))
@@ -122,55 +122,56 @@
 
 <body>
     <header>
-      <a href="../fr/index.html" id="accueil"><img src="../resources/icons/logo.png" width="24" height="24"><span>La Ligue</span></a>
-      <a href="../en/ligue.html" id="language"><span>English</span><img src="../resources/icons/United-kingdom_flag_icon_round.svg.png" width="24" height="24"></a>
+      <a href="../en/index.html" id="accueil"><img src="../resources/icons/logo.png" width="24" height="24"><span>La Ligue</span></a>
+      <a href="../fr/s9.html" id="language"><span>Français</span><img src="../resources/icons/France_flag.png" width="24" height="24"></a>
     </header>
 
     <main>
         <nav>
             <div>
-                <a href="#regularSeason">Saison Régulière</a>
-                <a href="#playoffs">Playoffs</a>
-                <a href="#teams">Équipes</a>
-                <a href="#modes">Modes de jeu</a>
+                <a href="#regularSeason">Regular Season</a>
+                <!--<a href="#playoffs">Playoffs</a>-->
+                <a href="#teams">Teams</a>
             </div>
         </nav>
 
-        <h1>Saison 8</h1>
-    
-        <h2 id="regularSeason">Saison régulière</h2>
+        <h1>Season 9</h1>
+
+        <h2 id="regularSeason">Regular Season</h2>
         <section class="modes">
             <article>
-                <img src="../resources/S8/D1_regularseason.png">
+                <img src="../resources/D1_regularseason.png">
             </article>
             <article>
-                <img src="../resources/S8/D2_regularseason.png">
+                <img src="../resources/D2_regularseason.png">
             </article>
             <article>
-                <img src="../resources/S8/D3_regularseason.png">
+                <img src="../resources/D3_regularseason.png">
             </article>
             <article>
-                <img src="../resources/S8/D4_regularseason.png">
+                <img src="../resources/D4_regularseason.png">
             </article>
         </section>
 
-        <h2 id="playoffs">Playoffs</h2>
+
+        <!--<h2 id="playoffs">Playoffs</h2>
         <section class="modes">
             <article>
-                <img src="../resources/S8/D1_playoffs.png">
+                <img src="../resources/D1_playoffs.png">
             </article>
             <article>
-                <img src="../resources/S8/D2_playoffs.png">
+                <img src="../resources/D2_playoffs.png">
             </article>
             <article>
-                <img src="../resources/S8/D3_playoffs.png">
+                <img src="../resources/D3_playoffs.png">
             </article>
             <article>
-                <img src="../resources/S8/D4_playoffs.png">
+                <img src="../resources/D4_playoffs.png">
             </article>
-        </section>
+        </section>-->
 
-        <h2 id="teams">Équipes</h2>
+
+        <h2 id="teams">Teams</h2>
 
         <h3>Division 1</h3>
     
@@ -191,32 +192,16 @@
         </section>
         
         <h3>Division 4</h3>
-    
+
         <section class="equipes" id="d4">
             
-        </section>
-    
-        <h2 id="modes">Modes de jeu</h2>
-        <section class="modes">
-            <article>
-                <img src="../resources/modes/triforce.png">
-            </article>
-            <article>
-                <img src="../resources/modes/equilibre.png">
-            </article>
-            <article>
-                <img src="../resources/modes/cs.png">
-            </article>
-            <article>
-                <img src="../resources/modes/skytourelle.png">
-            </article>
         </section>
     </main>
 
     <footer>
         <nav>
           <ul>
-            <li><h4>Réseaux</h4></li>
+            <li><h4>Networks</h4></li>
             <li><a href="https://www.helloasso.com/associations/la-ligue-de-loisir-geographique"><img src="../resources/icons/helloasso-96x96.png" width="16" height="16"><span>HelloAsso</span></a></li>
             <li><a href="https://discord.gg/693HbPE3rb"><img src="../resources/icons/discord.png" width="16" height="16"><span>Discord</span></a></li>
             <li><a href="https://www.twitch.tv/laliguegeoguessr"><img src="../resources/icons/twitch-32x32.png" width="16" height="16"><span>Twitch</span></a></li>
@@ -226,20 +211,20 @@
           </ul>
           <ul>
             <li><h4>La Ligue</h4></li>
-            <li><a href=""><span>Historique</span></a></li>
-            <li><a href="../fr/ligue.html"><span>Saison actuelle</span></a></li>
-            <li><a href="../fr/palmares.html"><span>Palmarès</span></a></li>
-            <li><a href=""><span>Modes de jeu</span></a></li>
+            <li><a href=""><span>History</span></a></li>
+            <li><a href="../en/ligue.html"><span>Current season</span></a></li>
+            <li><a href="../en/palmares.html"><span>Prize list</span></a></li>
+            <li><a href=""><span>Game modes</span></a></li>
           </ul>
           <ul>
-            <li><h4>Ressources</h4></li>
-            <li><a href="../tools/map.html"><span>Carte</span></a></li>
-            <li><a href=""><span>Assets graphiques</span></a></li>
+            <li><h4>Resources</h4></li>
+            <li><a href="../tools/map.html"><span>Map</span></a></li>
+            <li><a href=""><span>Graphic assets</span></a></li>
             <li><a href=""><span>Overlays</span></a></li>
           </ul>
         </nav>
-        <p>Copyright © 2025 La Ligue de Loisir Géographique. Tous droits réservés.</p>
-      </footer>
+        <p>Copyright © 2025 La Ligue de Loisir Géographique. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
